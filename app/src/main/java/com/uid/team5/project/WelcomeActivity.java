@@ -6,16 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.uid.team5.project.auth.LoginActivity;
-import com.uid.team5.project.auth.SignupActivity;
+import com.uid.team5.project.auth.RegisterActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_welcome);
     }
+
 
     public void loginUser(View view)
     {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void registerUser(View view)
     {
-        Intent intent = new Intent(this, SignupActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }

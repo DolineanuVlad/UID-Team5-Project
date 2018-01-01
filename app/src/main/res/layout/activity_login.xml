@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Sign in with Facebook"
+                android:text="@string/sign_in_with_facebook"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
