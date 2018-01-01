@@ -32,6 +32,7 @@
         android:layout_marginBottom="15dp"
         android:background="@color/colorPrimaryDark"
         android:fontFamily="serif"
+        android:onClick="registerUser"
         android:text="New user"
         android:textColor="@android:color/white" />
 
@@ -42,6 +43,7 @@
         android:background="@color/colorPrimaryDark"
         android:fontFamily="serif"
         android:text="Existing user"
+        android:onClick="loginUser"
         android:textColor="@android:color/white"
         android:textSize="12sp" />
 </LinearLayout>

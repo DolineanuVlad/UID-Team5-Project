@@ -8,11 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.uid.team5.project.auth.LoginActivity">
+    tools:context="com.uid.team5.project.auth.SignupActivity">
 
     <!-- Login progress -->
     <ProgressBar
-        android:id="@+id/login_progress"
+        android:id="@+id/signup_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,12 +20,12 @@
         android:visibility="gone" />
 
     <ScrollView
-        android:id="@+id/login_form"
+        android:id="@+id/signup_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
+            android:id="@+id/email_signup_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -61,7 +61,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
-                    android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -70,13 +69,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/email_register_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="@string/action_sign_in"
+                android:text="Register"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
@@ -89,11 +88,11 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/facebook_sign_in_button"
+                android:id="@+id/facebook_register_button"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Sign in with Facebook"
+                android:text="Register with Facebook"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
