@@ -22,4 +22,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_overview">Overview</string>
+    <string name="title_wishlist">Wishlist</string>
+    <string name="title_assistant">Assistant</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_add" />
+    <string name="title_transaction">Transaction</string>
+    <string name="holder_email_com">holder@email.com</string>
+    <string name="account_holder">Account Holder</string>
 </resources>

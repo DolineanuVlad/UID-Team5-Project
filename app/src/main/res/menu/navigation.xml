@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_transaction"
+        android:icon="@drawable/ic_compare_arrows_black_24dp"
+        android:title="@string/title_transaction" />
+
+    <item
+        android:id="@+id/navigation_overview"
+        android:icon="@drawable/ic_equalizer_black_24dp"
+        android:title="@string/title_overview" />
+
+    <item
+        android:id="@+id/navigation_add"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:title="@string/title_add" />
+
+    <item
+        android:id="@+id/navigation_wishlist"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        android:title="@string/title_wishlist" />
+
+    <item
+        android:id="@+id/navigation_assistant"
+        android:icon="@drawable/ic_lightbulb_outline_black_24dp"
+        android:title="@string/title_assistant" />
+
+
+</menu>
