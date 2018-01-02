@@ -1,10 +1,13 @@
 package com.uid.team5.project.shared;
 
 import android.app.AlertDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,13 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.uid.team5.project.R;
+import com.uid.team5.project.bottomNavigationFragments.OverviewFragment;
+import com.uid.team5.project.bottomNavigationFragments.TransactionsFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
+        OverviewFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +43,22 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //bottom navigation
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        BottomNavigationViewHelper.disableShiftMode(navigation);
+        //bottom bottom_navigation
+
+        BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigation);
+
+        //Manually displaying the first fragment(transactions) - one time only
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_frame_layout, TransactionsFragment.newInstance());
+        transaction.commit();
+
+        //Used to select an item programmatically(the transactions)
+        bottomNavigation.getMenu().getItem(0).setChecked(true);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -53,39 +68,38 @@ public class MainActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
             builder.setTitle("Changed Bottom Page");
 
             AlertDialog dialog = builder.create();
+            Fragment selectedFragment = null;
 
             switch (item.getItemId()) {
                 case R.id.navigation_transaction:
-                    builder.setMessage("Transaction");
-                   builder.create();
-                   builder.show();
-                    return true;
+                   selectedFragment = TransactionsFragment.newInstance();
+                   break;
                 case R.id.navigation_overview:
-                    builder.setMessage("Overview");
-                    builder.create();
-                    builder.show();
-                    return true;
+                    selectedFragment = OverviewFragment.newInstance();
+                    break;
                 case R.id.navigation_wishlist:
-                    builder.setMessage("Wishlist");
+                    builder.setMessage("Need to create a new fragment for Wishlist");
                     builder.create();
                     builder.show();
                     return true;
                 case R.id.navigation_assistant:
-                    builder.setMessage("Assistant");
+                    builder.setMessage("Need to create a new fragment for Assistant");
                     builder.create();
                     builder.show();
                     return true;
                 case R.id.navigation_add:
-                    builder.setMessage("Add");
+                    builder.setMessage("Need to create a new fragment for Add");
                     builder.create();
                     builder.show();
                     return true;
             }
-            return false;
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_frame_layout, selectedFragment);
+            transaction.commit();
+            return true;
         }
     };
 
@@ -125,7 +139,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle bottom_navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
@@ -141,5 +155,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        //for comunicating between fragments(if necessary)
     }
 }

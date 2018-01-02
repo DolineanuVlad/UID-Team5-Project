@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 /**
  * Created by Gabriel on 1/2/2018.
  * https://stackoverflow.com/questions/43492344/android-android-support-design-widget-bottomnavigationview-with-4-items-not-equa
- * Bottom navigation not shown correctly when more than 3 items
+ * Bottom bottom_navigation not shown correctly when more than 3 items
  */
 
 public class BottomNavigationViewHelper {
