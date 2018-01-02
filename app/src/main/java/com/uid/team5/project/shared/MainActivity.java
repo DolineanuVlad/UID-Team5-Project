@@ -15,15 +15,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.uid.team5.project.R;
-import com.uid.team5.project.bottomNavigationFragments.OverviewFragment;
-import com.uid.team5.project.bottomNavigationFragments.TransactionsFragment;
+import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
+import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
+import com.uid.team5.project.shared.drawer_activities.FamilyGroupFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
-        OverviewFragment.OnFragmentInteractionListener {
+        OverviewFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,16 +143,25 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle bottom_navigation view item clicks here.
         int id = item.getItemId();
+        BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.familly_group) {
+        Fragment selectedFragment  = null;
+        if (id == R.id.nav_home) {
+            selectedFragment = TransactionsFragment.newInstance();
+            bottomNavigation.setVisibility(View.VISIBLE);
+        }
+        else if (id == R.id.nav_family_group) {
+            selectedFragment = FamilyGroupFragment.newInstance();
+            bottomNavigation.setVisibility(View.GONE);
+        } else if (id == R.id.nav_rec_payments) {
 
-        } else if (id == R.id.rec_payments) {
-
-        } else if (id == R.id.expenses_categories) {
+        } else if (id == R.id.nav_categories) {
 
         }
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_frame_layout, selectedFragment);
+        transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

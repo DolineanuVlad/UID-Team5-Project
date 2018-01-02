@@ -5,27 +5,30 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Familly Group" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/home" />
         <item
-            android:id="@+id/familly_group"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Recuring Payments" />
+            android:id="@+id/nav_family_group"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="@string/family_group" />
         <item
-            android:id="@+id/rec_payments"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Expenses Categories" />
+            android:id="@+id/nav_rec_payments"
+            android:icon="@drawable/ic_payment_black_24dp"
+            android:title="@string/recuring_payments" />
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@drawable/ic_folder_black_24dp"
+            android:title="@string/expenses_categories" />
 
     </group>
 
     <item android:title="">
         <menu>
             <item
-                android:id="@+id/expenses_categories"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Settings" />
+                android:id="@+id/drawer_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/settings" />
         </menu>
     </item>
-
 </menu>

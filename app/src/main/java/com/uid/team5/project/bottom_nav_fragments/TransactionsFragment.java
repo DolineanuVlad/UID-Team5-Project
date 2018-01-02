@@ -1,4 +1,4 @@
-package com.uid.team5.project.bottomNavigationFragments;
+package com.uid.team5.project.bottom_nav_fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,16 +13,16 @@ import com.uid.team5.project.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OverviewFragment.OnFragmentInteractionListener} interface
+ * {@link TransactionsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link OverviewFragment#newInstance} factory method to
+ * Use the {@link TransactionsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OverviewFragment extends Fragment {
+public class TransactionsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public OverviewFragment() {
+    public TransactionsFragment() {
         // Required empty public constructor
     }
 
@@ -30,11 +30,10 @@ public class OverviewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment OverviewFragment.
+     * @return A new instance of fragment TransactionsFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static OverviewFragment newInstance() {
-        OverviewFragment fragment = new OverviewFragment();
+    public static TransactionsFragment newInstance() {
+        TransactionsFragment fragment = new TransactionsFragment();
         Bundle args = new Bundle();
         return fragment;
     }
@@ -42,13 +41,14 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_overview, container, false);
+        return inflater.inflate(R.layout.fragment_transactions, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

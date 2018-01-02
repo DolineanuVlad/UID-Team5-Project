@@ -23,7 +23,7 @@
     <FrameLayout
         android:id="@+id/main_frame_layout"
         android:layout_width="384dp"
-        android:layout_height="439dp"
+        android:layout_height="514dp"
         android:layout_marginTop="55dp"
         android:animateLayoutChanges="true"
         tools:layout_editor_absoluteY="-1dp">

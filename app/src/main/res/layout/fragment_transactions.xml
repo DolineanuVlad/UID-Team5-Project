@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.uid.team5.project.bottomNavigationFragments.TransactionsFragment">
+    tools:context="com.uid.team5.project.bottom_nav_fragments.TransactionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
