@@ -16,12 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.uid.team5.project.R;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
 import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
-import com.uid.team5.project.shared.drawer_activities.FamilyGroupFragment;
+import com.uid.team5.project.shared.drawer_fragments.FamilyGroupFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Changed Bottom Page");
 
-            AlertDialog dialog = builder.create();
+            final AlertDialog dialog = builder.create();
             Fragment selectedFragment = null;
 
             switch (item.getItemId()) {
@@ -93,9 +94,25 @@ public class MainActivity extends AppCompatActivity
                     builder.show();
                     return true;
                 case R.id.navigation_add:
-                    builder.setMessage("Need to create a new fragment for Add");
-                    builder.create();
-                    builder.show();
+                    final AlertDialog popup = builder.create();
+                    View addExpensePopup = (View) getLayoutInflater().inflate(R.layout.popup_add_expense, null);
+                    Button scanReceipt = (Button) addExpensePopup.findViewById(R.id.scan_receipt);
+                    Button scanBarcode = (Button) addExpensePopup.findViewById(R.id.scan_barcode);
+                    Button manuallyInsert = (Button) addExpensePopup.findViewById(R.id.manual_insertion);
+                    Button cancelButton = (Button) addExpensePopup.findViewById(R.id.cancel_adding_expense);
+
+
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popup.dismiss();
+                        }
+                    });
+
+                    popup.setTitle(null);
+                    popup.setView(addExpensePopup);
+                    popup.show();
                     return true;
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

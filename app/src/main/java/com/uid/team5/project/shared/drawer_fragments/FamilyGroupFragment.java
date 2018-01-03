@@ -1,4 +1,4 @@
-package com.uid.team5.project.shared.drawer_activities;
+package com.uid.team5.project.shared.drawer_fragments;
 
 import android.content.Context;
 import android.net.Uri;
