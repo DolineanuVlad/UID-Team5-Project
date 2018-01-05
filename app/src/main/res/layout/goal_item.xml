@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/goalName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="8"
+        android:inputType="textPersonName"
+        android:text="New Car" />
+
+    <EditText
+        android:id="@+id/goalPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="2"
+        android:inputType="textPersonName"
+        android:text="1" />
+
+    <ProgressBar
+        android:id="@+id/goalStatus"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/goalOpen"
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:layout_weight="1"
+        android:text="Open" />
+</LinearLayout>

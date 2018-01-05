@@ -21,12 +21,15 @@ import android.widget.Button;
 import com.uid.team5.project.R;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
 import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
+import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
 import com.uid.team5.project.shared.drawer_fragments.FamilyGroupFragment;
 
+import wishlist.AddNewGoalFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
-        OverviewFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener {
+        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +87,8 @@ public class MainActivity extends AppCompatActivity
                     selectedFragment = OverviewFragment.newInstance();
                     break;
                 case R.id.navigation_wishlist:
-                    builder.setMessage("Need to create a new fragment for Wishlist");
-                    builder.create();
-                    builder.show();
-                    return true;
+                    selectedFragment = WishlistFragment.newInstance();
+                   break;
                 case R.id.navigation_assistant:
                     builder.setMessage("Need to create a new fragment for Assistant");
                     builder.create();

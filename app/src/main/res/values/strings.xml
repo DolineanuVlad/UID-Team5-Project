@@ -45,4 +45,11 @@
     <string name="scan_barcode">Scan Barcode</string>
     <string name="manual_insertion">Manual Insertion</string>
     <string name="cancel">Cancel</string>
+    <string name="group_prompt">Choose target person</string>
+    <string-array name="group_arrays">
+        <item>Personal</item>
+        <item>Group</item>
+
+    </string-array>
+
 </resources>
