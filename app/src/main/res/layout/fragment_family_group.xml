@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.uid.team5.project.shared.drawer_fragments.FamilyGroupFragment">
+    tools:context="com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -29,15 +29,18 @@
         android:elevation="4dp"></ListView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton7"
+        android:id="@+id/floatingActionButtonAddMember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
         android:clickable="true"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:rippleColor="@color/colorPrimaryDark"
         app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
 </RelativeLayout>

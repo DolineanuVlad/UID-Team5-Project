@@ -1,13 +1,14 @@
-package com.uid.team5.project.shared.drawer_fragments;
+package com.uid.team5.project.shared.drawer_fragments.family_group;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.uid.team5.project.R;
@@ -28,7 +29,9 @@ public class FamilyGroupFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private ListView mListView;
+    private FloatingActionButton mAddMember;
 
+     ArrayList<Member> membersList;
 
     public FamilyGroupFragment() {
         // Required empty public constructor
@@ -62,23 +65,35 @@ public class FamilyGroupFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_family_group, container, false);
 
         mListView = (ListView) rootView.findViewById(R.id.family_group_list);
-// 1
-        final ArrayList<Member> membersList = new ArrayList<Member>();
+
+         membersList = new ArrayList<Member>();
 
         membersList.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger));
         membersList.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio));
-// 2
-        String[] listItems = new String[membersList.size()];
-// 3
-        for(int i = 0; i < membersList.size(); i++){
-            Member member = membersList.get(i);
-            listItems[i] = member.getName();
-        }
-// 4
+
         FamilyGroupAdapter adapter = new FamilyGroupAdapter(this.getContext(), membersList);
         mListView.setAdapter(adapter);
 
+        mAddMember = (FloatingActionButton)rootView.findViewById(R.id.floatingActionButtonAddMember);
+
+        mAddMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAddMemberView(view);
+            }
+        });
+
+
         return rootView;
+    }
+
+    private void openAddMemberView(View view) {
+
+        Fragment addMemberFragment = FamilyGroupAddMemberFragment.newInstance(membersList);
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_frame_layout, addMemberFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

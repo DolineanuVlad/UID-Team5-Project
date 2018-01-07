@@ -51,5 +51,9 @@
         <item>Group</item>
 
     </string-array>
-
+    <string-array name="family_group_roles">
+        <item>Regular</item>
+        <item>Administrator</item>
+        <item>Child</item>
+    </string-array>
 </resources>
