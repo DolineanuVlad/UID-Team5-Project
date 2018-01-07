@@ -7,8 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.uid.team5.project.R;
+import com.uid.team5.project.adapters.FamilyGroupAdapter;
+import com.uid.team5.project.models.Member;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +27,8 @@ import com.uid.team5.project.R;
 public class FamilyGroupFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private ListView mListView;
+
 
     public FamilyGroupFragment() {
         // Required empty public constructor
@@ -44,13 +52,33 @@ public class FamilyGroupFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_family_group, container, false);
+        View rootView =  inflater.inflate(R.layout.fragment_family_group, container, false);
+
+        mListView = (ListView) rootView.findViewById(R.id.family_group_list);
+// 1
+        final ArrayList<Member> membersList = new ArrayList<Member>();
+
+        membersList.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger));
+        membersList.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio));
+// 2
+        String[] listItems = new String[membersList.size()];
+// 3
+        for(int i = 0; i < membersList.size(); i++){
+            Member member = membersList.get(i);
+            listItems[i] = member.getName();
+        }
+// 4
+        FamilyGroupAdapter adapter = new FamilyGroupAdapter(this.getContext(), membersList);
+        mListView.setAdapter(adapter);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
