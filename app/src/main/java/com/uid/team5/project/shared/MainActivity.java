@@ -23,15 +23,17 @@ import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
 import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
+import com.uid.team5.project.models.RecurringPayment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment.OnFragmentInteractionListener;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFragment;
+import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsFragment;
 
 import wishlist.AddNewGoalFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
-        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener{
+        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener, RecurringPaymentsFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +176,8 @@ public class MainActivity extends AppCompatActivity
             selectedFragment = FamilyGroupFragment.newInstance();
             bottomNavigation.setVisibility(View.GONE);
         } else if (id == R.id.nav_rec_payments) {
-
+            selectedFragment = RecurringPaymentsFragment.newInstance();
+            bottomNavigation.setVisibility(View.GONE);
         } else if (id == R.id.nav_categories) {
 
         }
