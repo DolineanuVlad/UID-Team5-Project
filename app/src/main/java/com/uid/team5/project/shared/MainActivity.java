@@ -27,13 +27,14 @@ import com.uid.team5.project.models.RecurringPayment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment.OnFragmentInteractionListener;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFragment;
+import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsAddPaymentFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsFragment;
 
 import wishlist.AddNewGoalFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
-        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener, RecurringPaymentsFragment.OnFragmentInteractionListener{
+        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener, RecurringPaymentsFragment.OnFragmentInteractionListener, RecurringPaymentsAddPaymentFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
         //bottom bottom_navigation
 
