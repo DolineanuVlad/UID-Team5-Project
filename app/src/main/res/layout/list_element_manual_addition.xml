@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/description"
+        android:id="@+id/add_expense_description"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/price"
+        android:id="@+id/add_expense_price"
+        android:inputType="number"
+        />
+
+    <Spinner
+        android:id="@+id/add_expense_category"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:entries="@array/category_arrays">
+    </Spinner>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark" />
+
+</LinearLayout>

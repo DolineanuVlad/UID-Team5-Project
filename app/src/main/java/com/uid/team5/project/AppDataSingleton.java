@@ -1,5 +1,6 @@
 package com.uid.team5.project;
 
+import com.uid.team5.project.models.Expense;
 import com.uid.team5.project.models.Member;
 import com.uid.team5.project.models.RecurringPayment;
 
@@ -33,6 +34,12 @@ public class AppDataSingleton {
 
     private ArrayList<Member> members;
 
+    public ArrayList<Expense> expenses;
+
+    public void clearExpenses() {
+        this.expenses = new ArrayList<>();
+    }
+
 
     //singleton
     private static AppDataSingleton instance = null;
@@ -49,6 +56,7 @@ public class AppDataSingleton {
     {
         recurringPayments = new ArrayList<>();
         members = new ArrayList<>();
+        expenses = new ArrayList<>();
         enabledAssistant=false;
         recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
         recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));

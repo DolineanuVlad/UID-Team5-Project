@@ -1,6 +1,7 @@
 package com.uid.team5.project.shared;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.uid.team5.project.R;
+import com.uid.team5.project.add_expenses.ManualAdditionActivity;
 import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
 import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
@@ -132,6 +134,15 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onClick(View v) {
                             popup.dismiss();
+                        }
+                    });
+
+                    manuallyInsert.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popup.dismiss();
+                            Intent intent = new Intent(MainActivity.this, ManualAdditionActivity.class);
+                            startActivity(intent);
                         }
                     });
 
