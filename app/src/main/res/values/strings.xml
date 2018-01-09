@@ -71,7 +71,7 @@
         <item>Category 3</item>
     </string-array>
 
-    <string name="priority_prompt">Choose priority</string>
+    <string name="assistant">Enable personal assistant</string>
     <string-array name="priority_arrays">
         <item>High</item>
         <item>Medium</item>

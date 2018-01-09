@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.uid.team5.project.R;
+import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
 import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
@@ -45,7 +46,7 @@ import wishlist.GoalService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
-        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener, RecurringPaymentsFragment.OnFragmentInteractionListener, RecurringPaymentsAddPaymentFragment.OnFragmentInteractionListener {
+        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, AssistantFragment.OnFragmentInteractionListener,FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener, RecurringPaymentsFragment.OnFragmentInteractionListener, RecurringPaymentsAddPaymentFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +108,8 @@ public class MainActivity extends AppCompatActivity
                     ((WishlistFragment) selectedFragment).setGoals(goals);
                     break;
                 case R.id.navigation_assistant:
-                    builder.setMessage("Need to create a new fragment for Assistant");
-                    builder.create();
-                    builder.show();
-                    return true;
+                    selectedFragment= AssistantFragment.newInstance();
+                    break;
                 case R.id.navigation_add:
                     final AlertDialog popup = builder.create();
                     View addExpensePopup = (View) getLayoutInflater().inflate(R.layout.popup_add_expense, null);

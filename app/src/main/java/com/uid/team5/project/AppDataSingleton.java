@@ -21,6 +21,7 @@ public class AppDataSingleton {
     }
 
     private ArrayList<RecurringPayment> recurringPayments;
+    private boolean enabledAssistant;
 
     public ArrayList<Member> getMembers() {
         return members;
@@ -48,11 +49,19 @@ public class AppDataSingleton {
     {
         recurringPayments = new ArrayList<>();
         members = new ArrayList<>();
-
+        enabledAssistant=false;
         recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
         recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
 
         members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,50));
         members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,100));
+    }
+
+    public boolean isEnabledAssistant() {
+        return enabledAssistant;
+    }
+
+    public void setEnabledAssistant(boolean enabledAssistant) {
+        this.enabledAssistant = enabledAssistant;
     }
 }
