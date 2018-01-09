@@ -53,8 +53,8 @@ public class AppDataSingleton {
         recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
         recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
 
-        members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,50));
-        members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,100));
+        members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
+        members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
     }
 
     public boolean isEnabledAssistant() {

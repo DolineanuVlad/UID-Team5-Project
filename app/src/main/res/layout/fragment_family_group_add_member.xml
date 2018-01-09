@@ -18,7 +18,7 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/family_group_add_member_budget"
+        android:id="@+id/family_group_add_member_limitation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/family_group_add_member_budget"
+        android:layout_alignStart="@+id/family_group_add_member_limitation"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:text="Add member"
@@ -55,7 +55,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/family_group_add_member_budget"
+        android:layout_above="@+id/family_group_add_member_limitation"
         android:layout_alignStart="@+id/textView5"
         android:layout_marginBottom="37dp"
         android:text="Email" />
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/family_group_add_member_roles"
-        android:layout_alignStart="@+id/family_group_add_member_budget"
+        android:layout_alignStart="@+id/family_group_add_member_limitation"
         android:layout_marginBottom="32dp"
         android:text="Role" />
 
@@ -73,7 +73,7 @@
         android:id="@+id/family_group_add_member_save"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/family_group_add_member_budget"
+        android:layout_below="@+id/family_group_add_member_limitation"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="89dp"
         android:background="@color/colorPrimaryDark"
@@ -84,8 +84,8 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/family_group_add_member_budget"
+        android:layout_alignBottom="@+id/family_group_add_member_limitation"
         android:layout_alignStart="@+id/textView3"
         android:layout_marginBottom="33dp"
-        android:text="Budget" />
+        android:text="Limitation" />
 </RelativeLayout>

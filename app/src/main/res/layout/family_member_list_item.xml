@@ -39,6 +39,13 @@
         android:layout_below="@+id/family_group_list_item_name"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/family_group_list_item_limitation"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/family_group_list_item_name"
+        android:layout_below="@+id/family_group_list_item_role"
+        android:text="TextView" />
     <ImageButton
         android:id="@+id/family_group_list_item_edit"
         android:layout_width="wrap_content"

@@ -55,11 +55,11 @@ public class FamilyGroupAdapter extends BaseAdapter {
         TextView nameTextView = (TextView) rowView.findViewById(R.id.family_group_list_item_name);
         TextView roleTextView = (TextView) rowView.findViewById(R.id.family_group_list_item_role);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.family_group_list_item_image);
-
+        TextView limitation= (TextView) rowView.findViewById(R.id.family_group_list_item_limitation);
         nameTextView.setText(member.getName());
         roleTextView.setText(member.getRole());
         imageView.setImageResource(member.getImageId());
-
+        limitation.setText(member.getLimitation());
         return rowView;
     }
 }

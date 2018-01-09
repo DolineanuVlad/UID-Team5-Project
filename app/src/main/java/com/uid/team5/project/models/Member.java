@@ -6,18 +6,15 @@ package com.uid.team5.project.models;
 
 public class Member {
 
-    public float getBudget() {
-        return budget;
-    }
 
-    private final float budget;
+    private String limitation;
 
-    public Member(String name, String role, int imageId, float budget)
+    public Member(String name, String role, int imageId, String limitation)
     {
         this.name = name;
         this.role = role;
         this.imageId = imageId;
-        this.budget = budget;
+        this.limitation = limitation;
     }
 
    public String getName() {
@@ -60,4 +57,11 @@ public class Member {
 
     private int imageId;
 
+    public String getLimitation() {
+        return limitation;
+    }
+
+    public void setLimitation(String limitation) {
+        this.limitation = limitation;
+    }
 }
