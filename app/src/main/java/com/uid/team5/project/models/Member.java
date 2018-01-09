@@ -6,11 +6,18 @@ package com.uid.team5.project.models;
 
 public class Member {
 
-    public Member(String name, String role, int imageId)
+    public float getBudget() {
+        return budget;
+    }
+
+    private final float budget;
+
+    public Member(String name, String role, int imageId, float budget)
     {
         this.name = name;
         this.role = role;
         this.imageId = imageId;
+        this.budget = budget;
     }
 
    public String getName() {
