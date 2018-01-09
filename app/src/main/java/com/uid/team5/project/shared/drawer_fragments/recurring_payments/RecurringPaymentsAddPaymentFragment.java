@@ -8,9 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.models.Member;
+import com.uid.team5.project.models.RecurringPayment;
 
 import java.util.ArrayList;
 
@@ -25,6 +29,7 @@ import java.util.ArrayList;
 public class RecurringPaymentsAddPaymentFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    AppDataSingleton appData;
 
     public RecurringPaymentsAddPaymentFragment() {
         // Required empty public constructor
@@ -46,6 +51,8 @@ public class RecurringPaymentsAddPaymentFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        appData = AppDataSingleton.getInstance();
+
         super.onCreate(savedInstanceState);
     }
 
@@ -53,20 +60,30 @@ public class RecurringPaymentsAddPaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_recurring_payments_add_payment, container, false);
+        final View rootView =  inflater.inflate(R.layout.fragment_recurring_payments_add_payment, container, false);
 
         Button saveButton  = (Button) rootView.findViewById(R.id.recurring_payment_add_payment_save);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createMemberAndReturn();
+                createPaymentAndReturn(rootView);
             }
         });
         return rootView;
     }
 
-    private void createMemberAndReturn() {
+    private void createPaymentAndReturn(View rootView) {
+        TextView name = (TextView)rootView.findViewById(R.id.recurring_payment_add_name);
+        TextView budget = (TextView)rootView.findViewById(R.id.recurring_payment_add_amount);
+        Spinner role = (Spinner)rootView.findViewById(R.id.recurring_payment_add_category);
+        TextView date = (TextView)rootView.findViewById(R.id.recurring_payment_add_date);
+
+        RecurringPayment newPayment = new RecurringPayment(name.getText().toString(), date.getText().toString(),budget.getText().toString());
+
+        ArrayList<RecurringPayment> payments = appData.getRecurringPayments();
+        payments.add(newPayment);
+
         getFragmentManager().popBackStack();
     }
 
