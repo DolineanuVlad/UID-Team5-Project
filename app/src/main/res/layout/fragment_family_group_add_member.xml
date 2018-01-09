@@ -7,7 +7,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
-        android:id="@+id/family_group_add_member_email"
+        android:id="@+id/family_group_add_member_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/family_group_add_member_email"
+        android:layout_below="@+id/family_group_add_member_name"
         android:layout_marginStart="8dp"
         android:layout_marginTop="147dp"
         android:contentDescription="0.0"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/family_group_add_member_email"
+        android:layout_below="@+id/family_group_add_member_name"
         android:layout_marginTop="74dp"
         android:entries="@array/family_group_roles"
         android:visibility="visible" />

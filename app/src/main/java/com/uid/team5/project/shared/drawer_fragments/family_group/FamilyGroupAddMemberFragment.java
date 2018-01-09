@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.models.Member;
 
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 public class FamilyGroupAddMemberFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    AppDataSingleton appData;
 
     public FamilyGroupAddMemberFragment() {
         // Required empty public constructor
@@ -35,10 +39,9 @@ public class FamilyGroupAddMemberFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @return A new instance of fragment FamilyGroupAddMemberFragment.
-     * @param membersList
      */
     // TODO: Rename and change types and number of parameters
-    public static FamilyGroupAddMemberFragment newInstance(ArrayList<Member> membersList) {
+    public static FamilyGroupAddMemberFragment newInstance() {
         FamilyGroupAddMemberFragment fragment = new FamilyGroupAddMemberFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -47,6 +50,7 @@ public class FamilyGroupAddMemberFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        appData = AppDataSingleton.getInstance();
         super.onCreate(savedInstanceState);
     }
 
@@ -54,20 +58,30 @@ public class FamilyGroupAddMemberFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_family_group_add_member, container, false);
+        final View rootView =  inflater.inflate(R.layout.fragment_family_group_add_member, container, false);
 
-        Button saveButton  = (Button) rootView.findViewById(R.id.family_group_add_member_save);
+        Button saveButton  = rootView.findViewById(R.id.family_group_add_member_save);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createMemberAndReturn();
+                createMemberAndReturn(rootView);
             }
         });
         return rootView;
     }
 
-    private void createMemberAndReturn() {
+    private void createMemberAndReturn(View rootView) {
+
+        TextView name = (TextView)rootView.findViewById(R.id.family_group_add_member_name);
+        TextView budget = (TextView)rootView.findViewById(R.id.family_group_add_member_budget);
+        Spinner role = (Spinner)rootView.findViewById(R.id.family_group_add_member_roles);
+
+
+        Member newMember = new Member(name.getText().toString(), role.getSelectedItem().toString(), R.drawable.ic_avatar_person, Float.valueOf(budget.getText().toString()));
+
+        ArrayList<Member> members = appData.getMembers();
+        members.add(newMember);
         getFragmentManager().popBackStack();
     }
 

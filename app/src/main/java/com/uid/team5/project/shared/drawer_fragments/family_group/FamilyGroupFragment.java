@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.FamilyGroupAdapter;
 import com.uid.team5.project.models.Member;
@@ -31,7 +32,7 @@ public class FamilyGroupFragment extends Fragment {
     private ListView mListView;
     private FloatingActionButton mAddMember;
 
-     ArrayList<Member> membersList;
+    AppDataSingleton appData;
 
     public FamilyGroupFragment() {
         // Required empty public constructor
@@ -54,6 +55,7 @@ public class FamilyGroupFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        appData = AppDataSingleton.getInstance();
         super.onCreate(savedInstanceState);
 
     }
@@ -66,12 +68,7 @@ public class FamilyGroupFragment extends Fragment {
 
         mListView = (ListView) rootView.findViewById(R.id.family_group_list);
 
-         membersList = new ArrayList<Member>();
-
-        membersList.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger));
-        membersList.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio));
-
-        FamilyGroupAdapter adapter = new FamilyGroupAdapter(this.getContext(), membersList);
+        FamilyGroupAdapter adapter = new FamilyGroupAdapter(this.getContext(), appData.getMembers());
         mListView.setAdapter(adapter);
 
         mAddMember = (FloatingActionButton)rootView.findViewById(R.id.floatingActionButtonAddMember);
@@ -89,7 +86,7 @@ public class FamilyGroupFragment extends Fragment {
 
     private void openAddMemberView(View view) {
 
-        Fragment addMemberFragment = FamilyGroupAddMemberFragment.newInstance(membersList);
+        Fragment addMemberFragment = FamilyGroupAddMemberFragment.newInstance();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_frame_layout, addMemberFragment);
         transaction.addToBackStack(null);
@@ -134,4 +131,5 @@ public class FamilyGroupFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

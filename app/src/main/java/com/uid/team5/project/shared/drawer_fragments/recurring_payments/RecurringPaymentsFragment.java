@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
-import com.uid.team5.project.adapters.FamilyGroupAdapter;
 import com.uid.team5.project.adapters.RecurringPaymentAdapter;
-import com.uid.team5.project.models.Member;
 import com.uid.team5.project.models.RecurringPayment;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class RecurringPaymentsFragment extends Fragment {
     private ListView mListView;
     private FloatingActionButton mAddMember;
 
-    ArrayList<RecurringPayment> recurringPaymentsList;
+    AppDataSingleton appData;
 
     public RecurringPaymentsFragment() {
         // Required empty public constructor
@@ -56,6 +55,7 @@ public class RecurringPaymentsFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        appData = AppDataSingleton.getInstance();
         super.onCreate(savedInstanceState);
 
     }
@@ -66,17 +66,12 @@ public class RecurringPaymentsFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.recurring_payments_view, container, false);
 
-        mListView = (ListView) rootView.findViewById(R.id.recurring_payments_list);
+        mListView = rootView.findViewById(R.id.recurring_payments_list);
 
-        recurringPaymentsList = new ArrayList<RecurringPayment>();
-
-        recurringPaymentsList.add(new RecurringPayment("Rent", "11 of month", "255 $"));
-        recurringPaymentsList.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
-
-        RecurringPaymentAdapter adapter = new RecurringPaymentAdapter(this.getContext(), recurringPaymentsList);
+        RecurringPaymentAdapter adapter = new RecurringPaymentAdapter(this.getContext(), appData.getRecurringPayments());
         mListView.setAdapter(adapter);
 
-        mAddMember = (FloatingActionButton)rootView.findViewById(R.id.floatingActionButtonAddPayment);
+        mAddMember = rootView.findViewById(R.id.floatingActionButtonAddPayment);
 
         mAddMember.setOnClickListener(new View.OnClickListener() {
             @Override
