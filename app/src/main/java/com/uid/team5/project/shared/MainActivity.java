@@ -25,6 +25,7 @@ import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
 import com.uid.team5.project.models.RecurringPayment;
+import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesAddCategoryFragment;
 import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment.OnFragmentInteractionListener;
@@ -47,7 +48,13 @@ import wishlist.GoalService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
-        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener, AssistantFragment.OnFragmentInteractionListener,FamilyGroupFragment.OnFragmentInteractionListener , AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener, RecurringPaymentsFragment.OnFragmentInteractionListener, RecurringPaymentsAddPaymentFragment.OnFragmentInteractionListener {
+        OverviewFragment.OnFragmentInteractionListener,WishlistFragment.OnFragmentInteractionListener,
+        AssistantFragment.OnFragmentInteractionListener,FamilyGroupFragment.OnFragmentInteractionListener ,
+        AddNewGoalFragment.OnFragmentInteractionListener, OnFragmentInteractionListener,
+        RecurringPaymentsFragment.OnFragmentInteractionListener,
+        RecurringPaymentsAddPaymentFragment.OnFragmentInteractionListener,
+        ExpenseCategoriesAddCategoryFragment.OnFragmentInteractionListener,
+        ExpenseCategoriesFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
