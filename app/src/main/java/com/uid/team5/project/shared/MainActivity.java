@@ -25,6 +25,7 @@ import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
 import com.uid.team5.project.models.RecurringPayment;
+import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment.OnFragmentInteractionListener;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFragment;
@@ -191,7 +192,8 @@ public class MainActivity extends AppCompatActivity
             selectedFragment = RecurringPaymentsFragment.newInstance();
             bottomNavigation.setVisibility(View.GONE);
         } else if (id == R.id.nav_categories) {
-
+            selectedFragment = ExpenseCategoriesFragment.newInstance();
+            bottomNavigation.setVisibility(View.GONE);
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
