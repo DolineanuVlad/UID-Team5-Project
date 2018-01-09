@@ -8,31 +8,32 @@ import java.util.List;
  */
 
 public class GoalService {
-    public List<Goal> getGoals(){
+
+    public static List<Goal> getGoals(){
         List<Goal> goals=new ArrayList<Goal>() ;
 
         Goal goal=new Goal();
         goal.setName("Iphone 10");
-        goal.setPriority(1);
+        goal.setPriority("High");
         goal.setStatus(50);
         goals.add(goal);
 
         Goal goal1=new Goal();
         goal1.setName("Harry Potter 1");
-        goal1.setPriority(2);
+        goal1.setPriority("High");
         goal1.setStatus(80);
         goals.add(goal1);
 
         Goal goal2=new Goal();
         goal2.setName("Trip to Barcelona");
-        goal2.setPriority(2);
+        goal2.setPriority("Medium");
         goal2.setStatus(30);
         goal2.setPersonal(false);
         goals.add(goal2);
 
         Goal goal3=new Goal();
         goal3.setName("Xmas Presents");
-        goal3.setPriority(1);
+        goal3.setPriority("Medium");
         goal3.setStatus(80);
         goal3.setPersonal(false);
         goals.add(goal3);

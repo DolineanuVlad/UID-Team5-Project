@@ -41,17 +41,19 @@ public class WishlistFragment extends Fragment implements AddNewGoalFragment.OnF
      *
      * @return A new instance of fragment WishlistFragment.
      */
+
     public static WishlistFragment newInstance() {
         WishlistFragment fragment = new WishlistFragment();
         Bundle args = new Bundle();
         return fragment;
     }
 
+    public void setGoals(List<Goal> goals){
+        this.goals=goals;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        goalService=new GoalService();
-        goals=goalService.getGoals();
         goalsAdapter=new GoalAdapter(goals,context);
 
     }
@@ -67,7 +69,8 @@ public class WishlistFragment extends Fragment implements AddNewGoalFragment.OnF
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment= AddNewGoalFragment.newInstance();
+                AddNewGoalFragment fragment= AddNewGoalFragment.newInstance();
+                fragment.setGoals(goals);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame_layout, fragment);
                 transaction.commit();

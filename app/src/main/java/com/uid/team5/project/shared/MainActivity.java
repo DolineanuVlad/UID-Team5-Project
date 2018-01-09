@@ -30,7 +30,18 @@ import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFra
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsAddPaymentFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import wishlist.AddNewGoalFragment;
+import wishlist.Goal;
+import wishlist.GoalService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TransactionsFragment.OnFragmentInteractionListener,
@@ -91,7 +102,10 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case R.id.navigation_wishlist:
                     selectedFragment = WishlistFragment.newInstance();
-                   break;
+                    GoalService goalService=new GoalService();
+                    List<Goal> goals=goalService.getGoals();
+                    ((WishlistFragment) selectedFragment).setGoals(goals);
+                    break;
                 case R.id.navigation_assistant:
                     builder.setMessage("Need to create a new fragment for Assistant");
                     builder.create();

@@ -51,6 +51,14 @@
         <item>Group</item>
 
     </string-array>
+    <string name="pick_date">Pick Date</string>
+    <string name="category_prompt">Choose category</string>
+    <string-array name="category_arrays">
+        <item>Clothing</item>
+        <item>Gagets</item>
+        <item>House</item>
+        <item>Leisure</item>
+    </string-array>
     <string-array name="family_group_roles">
         <item>Regular</item>
         <item>Administrator</item>
@@ -63,4 +71,15 @@
         <item>Category 3</item>
     </string-array>
 
+    <string name="priority_prompt">Choose priority</string>
+    <string-array name="priority_arrays">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+    <string-array name="timespan_arrays">
+        <item>Monthly</item>
+        <item>Annually</item>
+        <item>Weekly</item>
+    </string-array>
 </resources>
