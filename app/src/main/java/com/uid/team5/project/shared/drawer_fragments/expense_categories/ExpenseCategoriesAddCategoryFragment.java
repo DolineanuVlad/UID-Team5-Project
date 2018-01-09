@@ -1,4 +1,4 @@
-package com.uid.team5.project.shared.drawer_fragments.family_group;
+package com.uid.team5.project.shared.drawer_fragments.expense_categories;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,30 +7,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
-import com.uid.team5.project.models.Member;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FamilyGroupAddMemberFragment.OnFragmentInteractionListener} interface
+ * {@link ExpenseCategoriesAddCategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FamilyGroupAddMemberFragment#newInstance} factory method to
+ * Use the {@link ExpenseCategoriesAddCategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FamilyGroupAddMemberFragment extends Fragment {
+public class ExpenseCategoriesAddCategoryFragment extends Fragment {
+
 
     private OnFragmentInteractionListener mListener;
-    AppDataSingleton appData;
 
-    public FamilyGroupAddMemberFragment() {
+    public ExpenseCategoriesAddCategoryFragment() {
         // Required empty public constructor
     }
 
@@ -38,19 +31,17 @@ public class FamilyGroupAddMemberFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment FamilyGroupAddMemberFragment.
+     * @return A new instance of fragment ExpenseCategoriesAddCategoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FamilyGroupAddMemberFragment newInstance() {
-        FamilyGroupAddMemberFragment fragment = new FamilyGroupAddMemberFragment();
+    public static ExpenseCategoriesAddCategoryFragment newInstance() {
+        ExpenseCategoriesAddCategoryFragment fragment = new ExpenseCategoriesAddCategoryFragment();
         Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        appData = AppDataSingleton.getInstance();
         super.onCreate(savedInstanceState);
     }
 
@@ -58,31 +49,7 @@ public class FamilyGroupAddMemberFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView =  inflater.inflate(R.layout.fragment_family_group_add_member, container, false);
-
-        Button saveButton  = rootView.findViewById(R.id.family_group_add_member_save);
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createMemberAndReturn(rootView);
-            }
-        });
-        return rootView;
-    }
-
-    private void createMemberAndReturn(View rootView) {
-
-        TextView name = (TextView)rootView.findViewById(R.id.family_group_add_member_name);
-        TextView limitation = (TextView)rootView.findViewById(R.id.family_group_add_member_limitation);
-        Spinner role = (Spinner)rootView.findViewById(R.id.family_group_add_member_roles);
-
-
-        Member newMember = new Member(name.getText().toString(), role.getSelectedItem().toString(), R.drawable.ic_avatar_person, limitation.getText().toString());
-
-        ArrayList<Member> members = appData.getMembers();
-        members.add(newMember);
-        getFragmentManager().popBackStack();
+        return inflater.inflate(R.layout.fragment_expense_categories_add_category, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
