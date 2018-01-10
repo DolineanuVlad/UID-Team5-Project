@@ -1,88 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.uid.team5.project.add_expenses.ManualAdditionActivity">
+    tools:context="com.uid.team5.project.add_expenses.ManualAdditionActivity"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/expense_list"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:padding="5dp"
+        android:transcriptMode="alwaysScroll"></ListView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_a_new_expense"/>
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:hint="@string/description"
+        android:id="@+id/new_expense_description"
+        />
 
-        <ListView
-            android:id="@+id/expense_list"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:padding="5dp"
-            android:transcriptMode="alwaysScroll"></ListView>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/price"
+        android:id="@+id/new_expense_price"
+        android:inputType="number"
+        />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+    <Spinner
+        android:id="@+id/new_expense_category"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:entries="@array/category_arrays">
+    </Spinner>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_a_new_expense"/>
+    <Button
+        android:text="@string/add_expense"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:onClick="onAddExpense"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/description"
-            android:id="@+id/new_expense_description"
-            />
+    <Button
+        android:text="@string/confirm"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textAlignment="center"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:onClick="onConfirm"/>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/price"
-            android:id="@+id/new_expense_price"
-            android:inputType="number"
-            />
-
-        <Spinner
-            android:id="@+id/new_expense_category"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:entries="@array/category_arrays">
-        </Spinner>
-
-        <Button
-            android:text="@string/add_expense"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="center"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@android:color/white"
-            android:layout_height="wrap_content"
-            android:onClick="onAddExpense"/>
-
-        <Button
-            android:text="@string/confirm"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textAlignment="center"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@android:color/white"
-            android:layout_height="wrap_content"
-            android:onClick="onConfirm"/>
-
-        <Button
-            android:text="@string/cancel"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@android:color/white"
-            android:layout_height="wrap_content"
-            android:onClick="onCancel"/>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:text="@string/cancel"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:onClick="onCancel"/>
+</LinearLayout>
