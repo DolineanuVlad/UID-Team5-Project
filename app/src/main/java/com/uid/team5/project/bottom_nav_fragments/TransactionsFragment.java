@@ -3,12 +3,18 @@ package com.uid.team5.project.bottom_nav_fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.adapters.TransactionsAdapter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,10 +26,12 @@ import com.uid.team5.project.R;
  */
 public class TransactionsFragment extends Fragment {
 
+    private AppDataSingleton dataService;
+
     private OnFragmentInteractionListener mListener;
 
     public TransactionsFragment() {
-        // Required empty public constructor
+        dataService = AppDataSingleton.getInstance();
     }
 
     /**
@@ -48,7 +56,40 @@ public class TransactionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transactions, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_transactions, container, false);
+
+        TabLayout tabLayout = (TabLayout)rootView.findViewById(R.id.transactions_tab_layout);
+
+        ListView listView = (ListView)rootView.findViewById(R.id.transactions_list_view);
+
+        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(this.getContext() ,dataService.getExpenses());
+        listView.setAdapter(transactionsAdapter);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() == 0)
+                {
+
+                }
+                else{
+                    //just load unfiltered list
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

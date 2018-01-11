@@ -34,10 +34,31 @@ public class AppDataSingleton {
 
     private ArrayList<Member> members;
 
+    public ArrayList<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(ArrayList<Expense> expenses) {
+        this.expenses = expenses;
+    }
+
     public ArrayList<Expense> expenses;
 
+
+
+    public ArrayList<Expense> getCurrentInserionOfExpenses() {
+        return currentInserionOfExpenses;
+    }
+
+    public void setCurrentInserionOfExpenses(ArrayList<Expense> currentInserionOfExpenses) {
+        this.currentInserionOfExpenses = currentInserionOfExpenses;
+    }
+
+    public ArrayList<Expense> currentInserionOfExpenses;
+
+
     public void clearExpenses() {
-        this.expenses = new ArrayList<>();
+        this.currentInserionOfExpenses = new ArrayList<>();
     }
 
 
@@ -57,12 +78,15 @@ public class AppDataSingleton {
         recurringPayments = new ArrayList<>();
         members = new ArrayList<>();
         expenses = new ArrayList<>();
+        currentInserionOfExpenses = new ArrayList<>();
         enabledAssistant=false;
         recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
         recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
 
         members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
         members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
+
+        expenses.add(new Expense("Example description", 52, "Lemne",1));
     }
 
     public boolean isEnabledAssistant() {

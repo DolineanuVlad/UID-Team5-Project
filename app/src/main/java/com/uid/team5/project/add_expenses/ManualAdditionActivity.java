@@ -31,7 +31,7 @@ public class ManualAdditionActivity extends AppCompatActivity {
         expensesList = findViewById(R.id.expense_list);
         cancelButton = findViewById(R.id.cancel_adding_expense);
         adapter = new AddExpensesAdapter(this);
-        adapter.expenses = dataService.expenses;
+        adapter.expenses = dataService.getCurrentInserionOfExpenses();
 
         expensesList.setAdapter(adapter);
     }
@@ -52,7 +52,7 @@ public class ManualAdditionActivity extends AppCompatActivity {
         String category = categorySpinner.getSelectedItem().toString();
         int categoryPosition = categorySpinner.getSelectedItemPosition();
 
-        dataService.expenses.add(new Expense(description, price, category, categoryPosition));
+        dataService.currentInserionOfExpenses.add(new Expense(description, price, category, categoryPosition));
         adapter.notifyDataSetChanged();
 
         descriptionText.setText(null);
@@ -64,7 +64,8 @@ public class ManualAdditionActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, "Expenses were added successfully!", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+        this.dataService.getExpenses().addAll(this.dataService.getCurrentInserionOfExpenses());
         this.dataService.clearExpenses();
-        this.onBackPressed();
+        this.finish();
     }
 }

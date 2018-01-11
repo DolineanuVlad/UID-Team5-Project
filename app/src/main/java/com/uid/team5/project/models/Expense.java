@@ -1,5 +1,7 @@
 package com.uid.team5.project.models;
 
+import com.uid.team5.project.R;
+
 /**
  * Created by vladdolineanuf on 03/01/2018.
  */
@@ -10,11 +12,34 @@ public class Expense {
     private String category;
     private int categoryPosition;
 
+    public int getCategoryImage() {
+        return categoryImage;
+    }
+
+    public void setCategoryImage(int categoryImage) {
+        this.categoryImage = categoryImage;
+    }
+
+    private int categoryImage;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    private String location;
+
     public Expense(String description, float price, String category, int categoryPosition) {
         this.description = description;
         this.price = price;
         this.category = category;
         this.categoryPosition = categoryPosition;
+        this.categoryImage = R.drawable.ic_train_black_24dp;
+        this.location = "";
+
     }
 
     public String getDescription() {

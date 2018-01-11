@@ -1,13 +1,43 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.uid.team5.project.bottom_nav_fragments.TransactionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Transactions fragment" />
 
-</FrameLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/transactions_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/transactions_tab_personal_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/transactions_tab_group_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Group" />
+    </android.support.design.widget.TabLayout>
+
+    <RelativeLayout
+        android:id="@+id/transactions_page_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/transactions_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+
+</LinearLayout>
