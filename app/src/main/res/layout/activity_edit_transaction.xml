@@ -1,0 +1,179 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/edit_transaction_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginBottom="28dp"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:layout_alignBottom="@+id/edit_transaction_amount_top"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="11dp"
+                android:layout_marginStart="14dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_location_on_black_24dp" />
+
+            <TextView
+                android:id="@+id/edit_transaction_amount_top"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="17dp"
+                android:text="32 USD"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/edit_transaction_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/edit_transaction_amount_top"
+                android:layout_alignBottom="@+id/edit_transaction_amount_top"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/imageView6"
+                android:text="TextView"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/edit_transaction_calendar_button"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="35dp"
+        app:srcCompat="@drawable/if_calendar_285670" />
+
+    <TextView
+        android:id="@+id/edit_transaction_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_transaction_calendar_button"
+        android:layout_marginStart="48dp"
+        android:layout_toEndOf="@+id/edit_transaction_calendar_button"
+        android:text="Today"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_alignStart="@+id/edit_transaction_calendar_button"
+        android:layout_alignTop="@+id/edit_transaction_description"
+        android:layout_marginTop="9dp"
+        app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+    <EditText
+        android:id="@+id/edit_transaction_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edit_transaction_date"
+        android:layout_below="@+id/edit_transaction_calendar_button"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="93dp"
+        app:srcCompat="@drawable/ic_location_on_black_24dp" />
+
+    <EditText
+        android:id="@+id/edit_transaction_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/edit_transaction_description"
+        android:layout_alignTop="@+id/imageView4"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPersonName" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_alignStart="@+id/imageView4"
+        android:layout_below="@+id/imageView4"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/ic_repeat_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/edit_transaction_location"
+        android:layout_alignTop="@+id/imageView5"
+        android:text="Repeat" />
+
+    <Spinner
+        android:id="@+id/edit_transaction_repeat_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView5"
+        android:layout_alignStart="@+id/textView14"
+        android:entries="@array/expenses_repeat"
+        android:spinnerMode="dialog" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="43dp"
+        android:layout_toEndOf="@+id/edit_transaction_location"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_done_black_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_attach_money_black_24dp" />
+
+    <EditText
+        android:id="@+id/edit_transaction_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/edit_transaction_description"
+        android:layout_alignTop="@+id/imageView7"
+        android:ems="10"
+        android:hint="Amount"
+        android:inputType="numberDecimal" />
+
+</RelativeLayout>

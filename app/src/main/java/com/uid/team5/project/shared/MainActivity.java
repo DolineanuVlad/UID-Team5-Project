@@ -25,13 +25,11 @@ import com.uid.team5.project.R;
 import com.uid.team5.project.add_expenses.ManualAdditionActivity;
 import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
-import com.uid.team5.project.bottom_nav_fragments.TransactionsFragment;
+import com.uid.team5.project.transactions.TransactionsFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
-import com.uid.team5.project.models.RecurringPayment;
 import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesAddCategoryFragment;
 import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesFragment;
-import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment.OnFragmentInteractionListener;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsAddPaymentFragment;
@@ -57,18 +55,21 @@ public class MainActivity extends AppCompatActivity
         ExpenseCategoriesAddCategoryFragment.OnFragmentInteractionListener,
         ExpenseCategoriesFragment.OnFragmentInteractionListener{
 
+    Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //hamburger menu
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("Transactions");
+        setSupportActionBar(mToolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -106,17 +107,24 @@ public class MainActivity extends AppCompatActivity
             switch (item.getItemId()) {
                 case R.id.navigation_transaction:
                    selectedFragment = TransactionsFragment.newInstance();
+                    mToolbar.setTitle("Transactions");
                    break;
                 case R.id.navigation_overview:
                     selectedFragment = OverviewFragment.newInstance();
+                    mToolbar.setTitle("Overview");
+
                     break;
                 case R.id.navigation_wishlist:
                     selectedFragment = WishlistFragment.newInstance();
                     GoalService goalService=new GoalService();
                     List<Goal> goals=goalService.getGoals();
                     ((WishlistFragment) selectedFragment).setGoals(goals);
+                    mToolbar.setTitle("Wishlist");
+
                     break;
                 case R.id.navigation_assistant:
+                    mToolbar.setTitle("Assistant");
+
                     selectedFragment= AssistantFragment.newInstance();
                     break;
                 case R.id.navigation_add:

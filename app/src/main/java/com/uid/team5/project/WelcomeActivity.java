@@ -16,14 +16,12 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
     }
 
-    public void loginUser(View view)
-    {
+    public void loginUser(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
-    public void registerUser(View view)
-    {
+    public void registerUser(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }

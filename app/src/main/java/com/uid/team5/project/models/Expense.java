@@ -15,6 +15,38 @@ public class Expense implements Serializable{
     private float price;
     private String category;
     private int categoryPosition;
+    private int id;
+    private Date date;
+    private int categoryImage;
+    private String location;
+    public Expense(int id, String description, float price, String category, int categoryPosition) {
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.categoryPosition = categoryPosition;
+        this.categoryImage = R.drawable.ic_train_black_24dp;
+        this.location = "";
+        this.date = Calendar.getInstance().getTime();
+        this.id = id;
+    }
+    public Expense() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public int getCategoryImage() {
         return categoryImage;
@@ -24,26 +56,12 @@ public class Expense implements Serializable{
         this.categoryImage = categoryImage;
     }
 
-    private int categoryImage;
-
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    private String location;
-
-    public Expense(String description, float price, String category, int categoryPosition) {
-        this.description = description;
-        this.price = price;
-        this.category = category;
-        this.categoryPosition = categoryPosition;
-        this.categoryImage = R.drawable.ic_train_black_24dp;
-        this.location = "";
-
     }
 
     public String getDescription() {
@@ -70,7 +88,11 @@ public class Expense implements Serializable{
         this.category = category;
     }
 
-    public int getCategoryPosition() { return categoryPosition; }
+    public int getCategoryPosition() {
+        return categoryPosition;
+    }
 
-    public void setCategoryPosition(int categoryPosition) { this.categoryPosition = categoryPosition; }
+    public void setCategoryPosition(int categoryPosition) {
+        this.categoryPosition = categoryPosition;
+    }
 }

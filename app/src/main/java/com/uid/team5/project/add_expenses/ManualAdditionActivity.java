@@ -52,7 +52,7 @@ public class ManualAdditionActivity extends AppCompatActivity {
         String category = categorySpinner.getSelectedItem().toString();
         int categoryPosition = categorySpinner.getSelectedItemPosition();
 
-        dataService.currentInserionOfExpenses.add(new Expense(description, price, category, categoryPosition));
+        dataService.currentInserionOfExpenses.add(new Expense(dataService.getExpenses().size(), description, price, category, categoryPosition));
         adapter.notifyDataSetChanged();
 
         descriptionText.setText(null);

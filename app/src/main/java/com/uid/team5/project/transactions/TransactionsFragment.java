@@ -1,6 +1,7 @@
-package com.uid.team5.project.bottom_nav_fragments;
+package com.uid.team5.project.transactions;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,13 +9,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.TransactionsAdapter;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +29,7 @@ public class TransactionsFragment extends Fragment {
     private AppDataSingleton dataService;
 
     private OnFragmentInteractionListener mListener;
+    ListView mTransactionsListView;
 
     public TransactionsFragment() {
         dataService = AppDataSingleton.getInstance();
@@ -55,44 +56,31 @@ public class TransactionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.fragment_transactions, container, false);
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.transactions_tab_layout);
+        mTransactionsListView = (ListView) rootView.findViewById(R.id.transactions_list_view);
+        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(this.getContext(), dataService.getExpenses());
+        mTransactionsListView.setAdapter(transactionsAdapter);
 
-        TabLayout tabLayout = (TabLayout)rootView.findViewById(R.id.transactions_tab_layout);
-
-        ListView listView = (ListView)rootView.findViewById(R.id.transactions_list_view);
-
-        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(this.getContext() ,dataService.getExpenses());
-        listView.setAdapter(transactionsAdapter);
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTransactionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 0)
-                {
-
-                }
-                else{
-                    //just load unfiltered list
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                dataService.setCurrentlyEdittedTransaction(dataService.getExpenses().get(i));
+                startActivityForResult(new Intent(TransactionsFragment.this.getContext(), EditTransactionActivity.class), 1);
             }
         });
 
-
+        tabLayout.addOnTabSelectedListener(new MyOnTabSelectedListener());
         return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        TransactionsAdapter transactionsAdapter = (TransactionsAdapter) mTransactionsListView.getAdapter();
+        transactionsAdapter.notifyDataSetChanged();
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -116,18 +104,26 @@ public class TransactionsFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private static class MyOnTabSelectedListener implements TabLayout.OnTabSelectedListener {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            if (tab.getPosition() == 0) {
+            } else {
+                //just load unfiltered list
+            }
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+        }
     }
 }

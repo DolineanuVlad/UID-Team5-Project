@@ -69,6 +69,11 @@
         <item>Child</item>
     </string-array>
 
+    <string-array name="expenses_repeat">
+        <item>No</item>
+        <item>Every day</item>
+        <item>Every month</item>
+    </string-array>
     <string-array name="expense_categories">
         <item>Category 1</item>
         <item>Category 2</item>

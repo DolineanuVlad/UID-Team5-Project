@@ -47,7 +47,7 @@ public class TransactionsAdapter extends BaseAdapter {
     @Override
     public long getItemId(int i) {
 
-        return i;
+        return mExpenses.get(i).getId();
     }
 
     @Override
