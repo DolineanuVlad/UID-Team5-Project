@@ -1,10 +1,12 @@
 package com.uid.team5.project.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Tamas on 1/9/2018.
  */
 
-public class Income {
+public class Income implements Serializable {
     private String name;
     private String value;
     private String occurance;

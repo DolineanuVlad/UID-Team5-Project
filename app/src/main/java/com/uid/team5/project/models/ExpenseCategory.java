@@ -1,10 +1,12 @@
 package com.uid.team5.project.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Tamas on 1/9/2018.
  */
 
-public class ExpenseCategory {
+public class ExpenseCategory implements Serializable {
     private String name;
     private String description;
 

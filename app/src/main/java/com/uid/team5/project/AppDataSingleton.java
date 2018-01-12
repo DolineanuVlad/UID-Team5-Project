@@ -1,77 +1,35 @@
 package com.uid.team5.project;
 
+import android.content.Context;
+
 import com.uid.team5.project.models.Expense;
 import com.uid.team5.project.models.Member;
 import com.uid.team5.project.models.RecurringPayment;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Gabriel on 1/9/2018.
  */
 
-public class AppDataSingleton {
-
-
-    public ArrayList<RecurringPayment> getRecurringPayments() {
-        return recurringPayments;
-    }
-
-    public void setRecurringPayments(ArrayList<RecurringPayment> recurringPayments) {
-        this.recurringPayments = recurringPayments;
-    }
-
-    private ArrayList<RecurringPayment> recurringPayments;
-    private boolean enabledAssistant;
-
-    public ArrayList<Member> getMembers() {
-        return members;
-    }
-
-    public void setMembers(ArrayList<Member> members) {
-        this.members = members;
-    }
-
-    private ArrayList<Member> members;
-
-    public ArrayList<Expense> getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(ArrayList<Expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    public ArrayList<Expense> expenses;
-
-
-
-    public ArrayList<Expense> getCurrentInserionOfExpenses() {
-        return currentInserionOfExpenses;
-    }
-
-    public void setCurrentInserionOfExpenses(ArrayList<Expense> currentInserionOfExpenses) {
-        this.currentInserionOfExpenses = currentInserionOfExpenses;
-    }
-
-    public ArrayList<Expense> currentInserionOfExpenses;
-
-
-    public void clearExpenses() {
-        this.currentInserionOfExpenses = new ArrayList<>();
-    }
+public class AppDataSingleton implements Serializable{
 
 
     //singleton
     private static AppDataSingleton instance = null;
-
-    public static AppDataSingleton getInstance()
-    {
-        if(instance == null)
-            instance = new AppDataSingleton();
-
-        return instance;
-    }
+    public ArrayList<Expense> expenses;
+    public ArrayList<Expense> currentInserionOfExpenses;
+    private ArrayList<RecurringPayment> recurringPayments;
+    private boolean enabledAssistant;
+    private ArrayList<Member> members;
+    private Expense CurrentlyEditted;
 
     public AppDataSingleton()
     {
@@ -86,7 +44,65 @@ public class AppDataSingleton {
         members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
         members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
 
-        expenses.add(new Expense("Example description", 52, "Lemne",1));
+        expenses.add(new Expense(expenses.size(),"Example description", 52, "Lemne",1));
+    }
+
+    public static void setInstance(AppDataSingleton mInstance)
+    {
+        if(instance == null)
+            instance = mInstance;
+    }
+
+    public static AppDataSingleton getInstance()
+    {
+        if(instance == null)
+            instance = new AppDataSingleton();
+
+        return instance;
+    }
+
+    public ArrayList<RecurringPayment> getRecurringPayments() {
+        return recurringPayments;
+    }
+
+    public void setRecurringPayments(ArrayList<RecurringPayment> recurringPayments) {
+        this.recurringPayments = recurringPayments;
+    }
+
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(ArrayList<Member> members) {
+        this.members = members;
+    }
+
+    public ArrayList<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(ArrayList<Expense> expenses) {
+        this.expenses = expenses;
+    }
+
+    public Expense getCurrentlyEditted() {
+        return CurrentlyEditted;
+    }
+
+    public void setCurrentlyEdittedTransaction(Expense currentlyEditted) {
+        CurrentlyEditted = currentlyEditted;
+    }
+
+    public ArrayList<Expense> getCurrentInserionOfExpenses() {
+        return currentInserionOfExpenses;
+    }
+
+    public void setCurrentInserionOfExpenses(ArrayList<Expense> currentInserionOfExpenses) {
+        this.currentInserionOfExpenses = currentInserionOfExpenses;
+    }
+
+    public void clearExpenses() {
+        this.currentInserionOfExpenses = new ArrayList<>();
     }
 
     public boolean isEnabledAssistant() {
@@ -95,5 +111,42 @@ public class AppDataSingleton {
 
     public void setEnabledAssistant(boolean enabledAssistant) {
         this.enabledAssistant = enabledAssistant;
+    }
+
+
+    public static void loadFromFile(Context context)
+    {
+        FileInputStream fis = null;
+        try {
+            fis = context.openFileInput("budget_data_save");
+            ObjectInputStream is = null;
+            is = new ObjectInputStream(fis);
+            AppDataSingleton dataSingleton = (AppDataSingleton) is.readObject();
+            AppDataSingleton.setInstance(dataSingleton);
+            is.close();
+
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveToFile(Context applicationContext) {
+        FileOutputStream fos = null;
+        try {
+            fos = applicationContext.openFileOutput("budget_data_save", Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(AppDataSingleton.getInstance());
+            os.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

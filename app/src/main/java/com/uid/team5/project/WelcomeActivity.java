@@ -27,4 +27,10 @@ public class WelcomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void onStart() {
+        AppDataSingleton.loadFromFile(getApplicationContext());
+        super.onStart();
+    }
 }

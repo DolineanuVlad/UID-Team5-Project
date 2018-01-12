@@ -2,11 +2,15 @@ package com.uid.team5.project.models;
 
 import com.uid.team5.project.R;
 
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Calendar;
+
 /**
  * Created by vladdolineanuf on 03/01/2018.
  */
 
-public class Expense {
+public class Expense implements Serializable{
     private String description;
     private float price;
     private String category;

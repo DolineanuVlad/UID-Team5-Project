@@ -1,10 +1,12 @@
 package com.uid.team5.project.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Gabriel on 1/7/2018.
  */
 
-public class RecurringPayment {
+public class RecurringPayment implements Serializable {
     public RecurringPayment(String name, String date, String amount) {
         this.name = name;
         this.date = date;

@@ -1,6 +1,7 @@
 package com.uid.team5.project.shared;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.add_expenses.ManualAdditionActivity;
 import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
@@ -35,13 +37,10 @@ import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFra
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsAddPaymentFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import wishlist.AddNewGoalFragment;
@@ -226,5 +225,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
         //for comunicating between fragments(if necessary)
+    }
+
+    @Override
+    protected void onPause() {
+        AppDataSingleton.saveToFile(getApplicationContext());
+        super.onPause();
     }
 }

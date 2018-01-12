@@ -1,10 +1,12 @@
 package com.uid.team5.project.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Gabriel on 1/5/2018.
  */
 
-public class Member {
+public class Member implements Serializable {
 
 
     private String limitation;
