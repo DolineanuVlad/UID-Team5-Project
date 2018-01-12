@@ -7,13 +7,28 @@ import android.view.View;
 
 import com.uid.team5.project.auth.LoginActivity;
 import com.uid.team5.project.auth.RegisterActivity;
+import com.uid.team5.project.shared.MainActivity;
+
+import java.util.UUID;
 
 public class WelcomeActivity extends AppCompatActivity {
 
+    private AppDataSingleton dataService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+
+        AppDataSingleton.loadFromFile(getApplicationContext());
+        dataService = AppDataSingleton.getInstance();
+        UUID userId = dataService.getCurrentUserId();
+
+        if(userId == null)
+        {
+            setContentView(R.layout.activity_welcome);
+        }
+        else{
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 
     public void loginUser(View view) {
@@ -24,11 +39,5 @@ public class WelcomeActivity extends AppCompatActivity {
     public void registerUser(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onStart() {
-        AppDataSingleton.loadFromFile(getApplicationContext());
-        super.onStart();
     }
 }

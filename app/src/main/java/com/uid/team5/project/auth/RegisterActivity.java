@@ -32,7 +32,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.models.User;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -40,6 +42,9 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class RegisterActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+
+    private AppDataSingleton dataService;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -68,6 +73,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        dataService = AppDataSingleton.getInstance();
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -92,8 +99,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        mLoginFormView = findViewById(R.id.signup_form);
+        mProgressView = findViewById(R.id.signup_progress);
     }
 
     private void populateAutoComplete() {
@@ -308,15 +315,17 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
+            ArrayList<User> users = dataService.getUsers();
+            if(users == null)
+                dataService.setUsers(new ArrayList<User>());
+
+            for (User user : users) {
+                if(user.getEmail().equals(mEmail))
+                    return false;
             }
 
-            // TODO: register the new account here.
+            User newUser = new User(mEmail, mPassword);
+            users.add(newUser);
             return true;
         }
 
@@ -328,8 +337,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                mEmailView.setError("Email address is taken");
+                mEmailView.requestFocus();
             }
         }
 
@@ -338,6 +347,18 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        AppDataSingleton.saveToFile(getApplicationContext());
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        AppDataSingleton.saveToFile(getApplicationContext());
+        super.onStop();
     }
 }
 

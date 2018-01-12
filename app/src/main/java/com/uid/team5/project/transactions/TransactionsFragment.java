@@ -126,4 +126,18 @@ public class TransactionsFragment extends Fragment {
         public void onTabReselected(TabLayout.Tab tab) {
         }
     }
+
+    @Override
+    public void onResume() {
+        TransactionsAdapter ta = (TransactionsAdapter) mTransactionsListView.getAdapter();
+        ta.notifyDataSetChanged();
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        TransactionsAdapter ta = (TransactionsAdapter) mTransactionsListView.getAdapter();
+        ta.notifyDataSetChanged();
+        super.onStart();
+    }
 }

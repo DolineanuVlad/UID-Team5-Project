@@ -30,7 +30,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.models.User;
 import com.uid.team5.project.shared.MainActivity;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+    private AppDataSingleton dataService;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -70,6 +74,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        dataService = AppDataSingleton.getInstance();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -308,16 +314,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+            ArrayList<User> users = dataService.getUsers();
+            for(User user: users)
+            {
+                if(user.getEmail().equals(mEmail) && user.getPassword().equals(mPassword))
+                {
+                    dataService.setCurrentUserId(user.getId());
+                    return true;
                 }
             }
 
-            // TODO: register the new account here.
-            return true;
+            return false;
         }
 
         @Override
@@ -339,6 +346,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        AppDataSingleton.saveToFile(getApplicationContext());
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        AppDataSingleton.saveToFile(getApplicationContext());
+        super.onStop();
     }
 }
 

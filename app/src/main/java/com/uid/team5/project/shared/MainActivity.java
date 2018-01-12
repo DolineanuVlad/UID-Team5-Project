@@ -1,7 +1,6 @@
 package com.uid.team5.project.shared;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,10 +21,10 @@ import android.widget.Button;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.WelcomeActivity;
 import com.uid.team5.project.add_expenses.ManualAdditionActivity;
 import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
-import com.uid.team5.project.transactions.TransactionsFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
 import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesAddCategoryFragment;
@@ -34,11 +33,8 @@ import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAdd
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsAddPaymentFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsFragment;
+import com.uid.team5.project.transactions.TransactionsFragment;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import wishlist.AddNewGoalFragment;
@@ -56,41 +52,7 @@ public class MainActivity extends AppCompatActivity
         ExpenseCategoriesFragment.OnFragmentInteractionListener{
 
     Toolbar mToolbar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //hamburger menu
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("Transactions");
-        setSupportActionBar(mToolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //bottom bottom_navigation
-
-        BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigation);
-
-        //Manually displaying the first fragment(transactions) - one time only
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_frame_layout, TransactionsFragment.newInstance());
-        transaction.commit();
-
-        //Used to select an item programmatically(the transactions)
-        bottomNavigation.getMenu().getItem(0).setChecked(true);
-    }
+    private AppDataSingleton dataService;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -167,6 +129,43 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        dataService = AppDataSingleton.getInstance();
+
+        //hamburger menu
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("Transactions");
+        setSupportActionBar(mToolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //bottom bottom_navigation
+
+        BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigation);
+
+        //Manually displaying the first fragment(transactions) - one time only
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_frame_layout, TransactionsFragment.newInstance());
+        transaction.commit();
+
+        //Used to select an item programmatically(the transactions)
+        bottomNavigation.getMenu().getItem(0).setChecked(true);
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -193,6 +192,16 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        else if(id == R.id.menu_log_out)
+        {
+            dataService.setCurrentUserId(null);
+            startActivity(new Intent(this, WelcomeActivity.class));
+        }
+        else if(id == R.id.menu_reset_app)
+        {
+            startActivity(new Intent(this, WelcomeActivity.class));
+            AppDataSingleton.setInstance(null);
         }
 
         return super.onOptionsItemSelected(item);
@@ -239,5 +248,11 @@ public class MainActivity extends AppCompatActivity
     protected void onPause() {
         AppDataSingleton.saveToFile(getApplicationContext());
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        AppDataSingleton.saveToFile(getApplicationContext());
+        super.onStop();
     }
 }

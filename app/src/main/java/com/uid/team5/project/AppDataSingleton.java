@@ -5,6 +5,7 @@ import android.content.Context;
 import com.uid.team5.project.models.Expense;
 import com.uid.team5.project.models.Member;
 import com.uid.team5.project.models.RecurringPayment;
+import com.uid.team5.project.models.User;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Gabriel on 1/9/2018.
@@ -21,8 +23,6 @@ import java.util.ArrayList;
 
 public class AppDataSingleton implements Serializable{
 
-
-    //singleton
     private static AppDataSingleton instance = null;
     public ArrayList<Expense> expenses;
     public ArrayList<Expense> currentInserionOfExpenses;
@@ -31,12 +31,30 @@ public class AppDataSingleton implements Serializable{
     private ArrayList<Member> members;
     private Expense CurrentlyEditted;
 
+    public UUID getCurrentUserId() {
+        return currentUserId;
+    }
+
+    private UUID currentUserId;
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    private ArrayList<User> users;
+
     public AppDataSingleton()
     {
         recurringPayments = new ArrayList<>();
         members = new ArrayList<>();
         expenses = new ArrayList<>();
         currentInserionOfExpenses = new ArrayList<>();
+        users = new ArrayList<>();
+
         enabledAssistant=false;
         recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
         recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
@@ -47,18 +65,53 @@ public class AppDataSingleton implements Serializable{
         expenses.add(new Expense(expenses.size(),"Example description", 52, "Lemne",1));
     }
 
-    public static void setInstance(AppDataSingleton mInstance)
-    {
-        if(instance == null)
-            instance = mInstance;
-    }
-
     public static AppDataSingleton getInstance()
     {
         if(instance == null)
+        {
             instance = new AppDataSingleton();
+        }
 
         return instance;
+    }
+
+    public static void setInstance(AppDataSingleton mInstance)
+    {
+        instance = mInstance;
+    }
+
+    public static void loadFromFile(Context context)
+    {
+        FileInputStream fis = null;
+        try {
+            fis = context.openFileInput("budget_data_save");
+            ObjectInputStream is = null;
+            is = new ObjectInputStream(fis);
+            AppDataSingleton dataSingleton = (AppDataSingleton) is.readObject();
+            AppDataSingleton.setInstance(dataSingleton);
+            is.close();
+
+            fis.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveToFile(Context applicationContext) {
+        FileOutputStream fos = null;
+        try {
+            fos = applicationContext.openFileOutput("budget_data_save", Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(AppDataSingleton.getInstance());
+            os.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<RecurringPayment> getRecurringPayments() {
@@ -113,38 +166,7 @@ public class AppDataSingleton implements Serializable{
         this.enabledAssistant = enabledAssistant;
     }
 
-
-    public static void loadFromFile(Context context)
-    {
-        FileInputStream fis = null;
-        try {
-            fis = context.openFileInput("budget_data_save");
-            ObjectInputStream is = null;
-            is = new ObjectInputStream(fis);
-            AppDataSingleton dataSingleton = (AppDataSingleton) is.readObject();
-            AppDataSingleton.setInstance(dataSingleton);
-            is.close();
-
-            fis.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void saveToFile(Context applicationContext) {
-        FileOutputStream fos = null;
-        try {
-            fos = applicationContext.openFileOutput("budget_data_save", Context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(AppDataSingleton.getInstance());
-            os.close();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setCurrentUserId(UUID currentUserId) {
+        this.currentUserId = currentUserId;
     }
 }
