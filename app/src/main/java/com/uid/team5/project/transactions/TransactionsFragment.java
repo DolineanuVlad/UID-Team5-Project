@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import android.widget.ListView;
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.TransactionsAdapter;
+import com.uid.team5.project.models.Expense;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +31,7 @@ import com.uid.team5.project.adapters.TransactionsAdapter;
 public class TransactionsFragment extends Fragment {
 
     private AppDataSingleton dataService;
-
+    TransactionsAdapter transactionsAdapter;
     private OnFragmentInteractionListener mListener;
     ListView mTransactionsListView;
 
@@ -60,7 +64,8 @@ public class TransactionsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_transactions, container, false);
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.transactions_tab_layout);
         mTransactionsListView = (ListView) rootView.findViewById(R.id.transactions_list_view);
-        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(this.getContext(), dataService.getExpenses());
+
+        transactionsAdapter = new TransactionsAdapter(this.getContext(), dataService.getExpensesByCurrentUser());
         mTransactionsListView.setAdapter(transactionsAdapter);
 
         mTransactionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -109,12 +114,21 @@ public class TransactionsFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private static class MyOnTabSelectedListener implements TabLayout.OnTabSelectedListener {
+    private class MyOnTabSelectedListener implements TabLayout.OnTabSelectedListener {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             if (tab.getPosition() == 0) {
+
+                ArrayList<Expense> usersExpenses  = dataService.getExpensesByCurrentUser();
+
+                TransactionsFragment.this.transactionsAdapter.setmExpenses(usersExpenses);
+                TransactionsFragment.this.transactionsAdapter.notifyDataSetChanged();
+
             } else {
-                //just load unfiltered list
+                ArrayList<Expense> allExpenses  = dataService.getExpenses();
+
+                TransactionsFragment.this.transactionsAdapter.setmExpenses(allExpenses);
+                TransactionsFragment.this.transactionsAdapter.notifyDataSetChanged();
             }
         }
 

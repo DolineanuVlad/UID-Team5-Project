@@ -20,6 +20,14 @@ import java.util.ArrayList;
 
 public class TransactionsAdapter extends BaseAdapter {
 
+    public ArrayList<Expense> getmExpenses() {
+        return mExpenses;
+    }
+
+    public void setmExpenses(ArrayList<Expense> mExpenses) {
+        this.mExpenses = mExpenses;
+    }
+
     ArrayList<Expense> mExpenses;
     Context mContext;
     LayoutInflater mInflater;

@@ -1,16 +1,18 @@
 package com.uid.team5.project.models;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.UUID;
 
 /**
  * Created by vladdolineanuf on 03/01/2018.
  */
 
-public class Expense implements Serializable{
+public class Expense implements Serializable {
     private String description;
     private float price;
     private String category;
@@ -19,6 +21,8 @@ public class Expense implements Serializable{
     private Date date;
     private int categoryImage;
     private String location;
+    private UUID createdByUser;
+
     public Expense(int id, String description, float price, String category, int categoryPosition) {
         this.description = description;
         this.price = price;
@@ -28,8 +32,18 @@ public class Expense implements Serializable{
         this.location = "";
         this.date = Calendar.getInstance().getTime();
         this.id = id;
+        this.createdByUser = AppDataSingleton.getInstance().getCurrentUserId();
     }
+
     public Expense() {
+    }
+
+    public UUID getCreatedByUser() {
+        return createdByUser;
+    }
+
+    public void setCreatedByUser(UUID createdByUser) {
+        this.createdByUser = createdByUser;
     }
 
     public int getId() {

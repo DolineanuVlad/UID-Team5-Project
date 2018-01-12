@@ -56,13 +56,13 @@ public class AppDataSingleton implements Serializable{
         users = new ArrayList<>();
 
         enabledAssistant=false;
-        recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
-        recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
+        //recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
+        //recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
 
-        members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
-        members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
+        //members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
+       // members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
 
-        expenses.add(new Expense(expenses.size(),"Example description", 52, "Lemne",1));
+        //expenses.add(new Expense(expenses.size(),"Example description", 52, "Lemne",1));
     }
 
     public static AppDataSingleton getInstance()
@@ -168,5 +168,17 @@ public class AppDataSingleton implements Serializable{
 
     public void setCurrentUserId(UUID currentUserId) {
         this.currentUserId = currentUserId;
+    }
+
+    public ArrayList<Expense> getExpensesByCurrentUser() {
+
+        ArrayList<Expense> usersExpenses = new ArrayList<>();
+        for(Expense exp: expenses)
+        {
+            if(exp.getCreatedByUser().equals(currentUserId))
+                usersExpenses.add(exp);
+        }
+
+        return usersExpenses;
     }
 }

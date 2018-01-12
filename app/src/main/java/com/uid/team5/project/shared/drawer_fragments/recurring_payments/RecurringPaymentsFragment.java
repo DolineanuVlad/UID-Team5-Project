@@ -79,8 +79,6 @@ public class RecurringPaymentsFragment extends Fragment {
                 openAddExpenseView(view);
             }
         });
-
-
         return rootView;
     }
 
