@@ -150,11 +150,14 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="43dp"
-        android:layout_toEndOf="@+id/edit_transaction_location"
+        android:layout_marginBottom="31dp"
+        android:layout_toEndOf="@+id/edit_transaction_repeat_spinner"
         android:clickable="true"
+        android:visibility="visible"
+        app:elevation="10dp"
+        app:fabSize="normal"
         app:srcCompat="@drawable/ic_done_black_24dp" />
 
     <ImageView
