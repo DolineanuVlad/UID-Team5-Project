@@ -23,7 +23,7 @@
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/transactions_item_category_image"
         android:text="Food &amp; Drink"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <ImageView
@@ -32,35 +32,37 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/transactions_item_category_image"
         android:layout_toEndOf="@+id/transactions_item_category_image"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
     <TextView
         android:id="@+id/transactions_item_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/transactions_item_description"
         android:layout_alignTop="@+id/transactions_item_loc_image"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/transactions_item_loc_image"
         android:text="TextView"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/transactions_item_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/transactions_item_descript_image"
+        android:layout_below="@+id/transactions_item_category_image"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
         android:layout_toEndOf="@+id/transactions_item_descript_image"
         android:text="TextView"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/transactions_item_descript_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/transactions_item_loc_image"
-        android:layout_below="@+id/transactions_item_loc_image"
-        android:visibility="invisible"
+        android:layout_alignTop="@+id/transactions_item_description"
+        android:layout_toEndOf="@+id/transactions_item_category_image"
+        android:visibility="gone"
         app:srcCompat="@drawable/ic_edit_black_24dp" />
 
     <TextView
@@ -71,5 +73,5 @@
         android:layout_alignTop="@+id/transactions_item_category"
         android:layout_marginEnd="12dp"
         android:text="TextView"
-        android:textColor="@android:color/holo_red_light" />
+        android:textColor="?attr/colorBackgroundFloating" />
 </RelativeLayout>
