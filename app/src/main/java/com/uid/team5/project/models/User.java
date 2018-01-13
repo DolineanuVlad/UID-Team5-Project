@@ -11,7 +11,24 @@ public class User implements Serializable {
 
     private String email;
     private String password;
+    private String name;
     private UUID id;
+
+    public User(String email, String password, String name)
+    {
+        this.email = email;
+        this.password = password;
+        this.id = UUID.randomUUID();
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public UUID getId() {
         return id;
@@ -19,13 +36,6 @@ public class User implements Serializable {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public User(String email, String password)
-    {
-        this.email = email;
-        this.password = password;
-        this.id = UUID.randomUUID();
     }
 
     public String getEmail() {

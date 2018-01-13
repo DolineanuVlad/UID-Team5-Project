@@ -56,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity  {
     // UI references.
     private EditText mEmailView;
     private EditText mPasswordView;
+    private EditText mNameView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -67,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity  {
 
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.input_email);
-
+        mNameView = (EditText) findViewById(R.id.input_name);
         mPasswordView = (EditText) findViewById(R.id.input_password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -117,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity  {
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        String name = mNameView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -147,7 +149,7 @@ public class RegisterActivity extends AppCompatActivity  {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserRegisterTask(email, password);
+            mAuthTask = new UserRegisterTask(email, password,name);
             mAuthTask.execute((Void) null);
         }
     }
@@ -170,14 +172,14 @@ public class RegisterActivity extends AppCompatActivity  {
 
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+//                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//                }
+//            });
 
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
@@ -198,10 +200,13 @@ public class RegisterActivity extends AppCompatActivity  {
 
         private final String mEmail;
         private final String mPassword;
+        private final String mName;
 
-        UserRegisterTask(String email, String password) {
+
+        UserRegisterTask(String email, String password, String name) {
             mEmail = email;
             mPassword = password;
+            mName = name;
         }
 
         @Override
@@ -224,7 +229,7 @@ public class RegisterActivity extends AppCompatActivity  {
                     return false;
             }
 
-            User newUser = new User(mEmail, mPassword);
+            User newUser = new User(mEmail, mPassword, mName);
             users.add(newUser);
             return true;
         }

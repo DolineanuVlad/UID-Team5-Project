@@ -181,4 +181,18 @@ public class AppDataSingleton implements Serializable{
 
         return usersExpenses;
     }
+
+    public User getCurrentUser()
+    {
+        if(this.currentUserId != null)
+        {
+            for(User user: users)
+            {
+                if(user.getId().equals(this.currentUserId))
+                    return user;
+            }
+        }
+
+        return null;
+    }
 }
