@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -37,6 +40,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".add_expenses.ManualAdditionActivity" />
         <activity android:name=".transactions.EditTransactionActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDiOxQIhqQw3yiulcPDf1jvk6JC2PgouM0"/>
     </application>
 
 </manifest>

@@ -10,29 +10,42 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <Switch
-        android:id="@+id/switch3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Group   " />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/wishlist_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <android.support.design.widget.TabItem
+            android:id="@+id/wishlist_tab_personal_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/wishlist_tab_group_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Group" />
+    </android.support.design.widget.TabLayout>
     <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="9"
-        android:inputType="textPersonName"
-        android:text="Goals" />
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="2"
-        android:inputType="textPersonName"
-        android:text="Priority" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:ems="9"
+            android:inputType="textPersonName"
+            android:text="Goals" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:ems="2"
+            android:inputType="textPersonName"
+            android:text="Priority" />
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"

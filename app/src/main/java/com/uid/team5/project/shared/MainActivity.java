@@ -23,6 +23,7 @@ import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.WelcomeActivity;
 import com.uid.team5.project.add_expenses.ManualAdditionActivity;
+import com.uid.team5.project.assistant.GasCardFragment;
 import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity
         RecurringPaymentsFragment.OnFragmentInteractionListener,
         RecurringPaymentsAddPaymentFragment.OnFragmentInteractionListener,
         ExpenseCategoriesAddCategoryFragment.OnFragmentInteractionListener,
-        ExpenseCategoriesFragment.OnFragmentInteractionListener{
+        ExpenseCategoriesFragment.OnFragmentInteractionListener,
+        GasCardFragment.OnFragmentInteractionListener{
 
     Toolbar mToolbar;
     private AppDataSingleton dataService;

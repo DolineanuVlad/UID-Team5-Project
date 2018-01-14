@@ -3,6 +3,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 
 import com.uid.team5.project.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import wishlist.AddNewGoalFragment;
@@ -26,7 +28,9 @@ import wishlist.GoalService;
 public class WishlistFragment extends Fragment implements AddNewGoalFragment.OnFragmentInteractionListener{
     private WishlistFragment.OnFragmentInteractionListener mListener;
     private List<Goal> goals;
+    private List<Goal> personalGoals;
     private GoalAdapter goalsAdapter;
+    private GoalAdapter personalGoalsAdapter;
     private GoalService goalService;
     private Context context;
     private ListView goalsListView;
@@ -50,12 +54,19 @@ public class WishlistFragment extends Fragment implements AddNewGoalFragment.OnF
 
     public void setGoals(List<Goal> goals){
         this.goals=goals;
+        personalGoals=new ArrayList<Goal>();
+        for (Goal g:goals){
+            if (g.isPersonal()){
+                personalGoals.add(g);
+            }
+        }
+
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        personalGoalsAdapter=new GoalAdapter(personalGoals,context);
         goalsAdapter=new GoalAdapter(goals,context);
-
     }
 
     @Override
@@ -64,7 +75,7 @@ public class WishlistFragment extends Fragment implements AddNewGoalFragment.OnF
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_wishlist, container, false);
         goalsListView=view.findViewById(R.id.goalsListView);
-        goalsListView.setAdapter(goalsAdapter);
+        goalsListView.setAdapter(personalGoalsAdapter);
         FloatingActionButton fab=view.findViewById(R.id.addGoalButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +85,27 @@ public class WishlistFragment extends Fragment implements AddNewGoalFragment.OnF
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame_layout, fragment);
                 transaction.commit();
+            }
+        });
+        TabLayout tabLayout =view.findViewById(R.id.wishlist_tab_layout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition()==1){
+                    goalsListView.setAdapter(goalsAdapter);
+                }else{
+                    goalsListView.setAdapter(personalGoalsAdapter);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
         return view;

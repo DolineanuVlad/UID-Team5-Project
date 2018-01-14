@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scrollbars="vertical"
+        class="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card6"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@android:color/holo_orange_light"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="33dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bulb2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:contentDescription="bulb"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bulb" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="300dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16dp"
+            android:text=" Multiple users reported sales today at this location."
+            android:textColor="@color/cardview_light_background" />
+
+    </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:id="@+id/graph" />
+</LinearLayout>

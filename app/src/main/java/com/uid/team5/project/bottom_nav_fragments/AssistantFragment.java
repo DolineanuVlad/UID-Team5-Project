@@ -1,18 +1,25 @@
 package com.uid.team5.project.bottom_nav_fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.add_expenses.ManualAdditionActivity;
+import com.uid.team5.project.assistant.GasCardFragment;
+import com.uid.team5.project.shared.MainActivity;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
@@ -54,6 +61,8 @@ private boolean enabled;
                              Bundle savedInstanceState) {
         View view=(View)inflater.inflate(R.layout.fragment_assistant, container, false);
         Switch onOffSwitch = (Switch)  view.findViewById(R.id.enableAssistant);
+        Button addBtn=(Button)view.findViewById(R.id.addShopping);
+        Button details=(Button)view.findViewById(R.id.detailsGas);
         if (AppDataSingleton.getInstance().isEnabledAssistant()){
             onOffSwitch.setChecked(true);
             view.findViewById(R.id.cards).setVisibility(View.VISIBLE);
@@ -76,8 +85,55 @@ private boolean enabled;
             }
 
         });
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup(view);
+            }
+        });
+        details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GasCardFragment fragment= GasCardFragment.newInstance();
 
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame_layout, fragment);
+                transaction.commit();;
+            }
+        });
         return view;
+    }
+
+    private void showPopup(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final AlertDialog popup = builder.create();
+        View addExpensePopup = (View) getLayoutInflater().inflate(R.layout.popup_add_expense, null);
+        Button scanReceipt = (Button) addExpensePopup.findViewById(R.id.scan_receipt);
+        Button scanBarcode = (Button) addExpensePopup.findViewById(R.id.scan_barcode);
+        Button manuallyInsert = (Button) addExpensePopup.findViewById(R.id.manual_insertion);
+        Button cancelButton = (Button) addExpensePopup.findViewById(R.id.cancel_adding_expense);
+
+
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.dismiss();
+            }
+        });
+
+        manuallyInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.dismiss();
+                Intent intent = new Intent(getContext(), ManualAdditionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        popup.setTitle(null);
+        popup.setView(addExpensePopup);
+        popup.show();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
