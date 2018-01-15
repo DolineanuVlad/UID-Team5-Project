@@ -20,50 +20,7 @@
     android:layout_marginLeft="10dp"
     android:id="@+id/cards"
    >
-    <android.support.v7.widget.CardView
-        android:id="@+id/card1"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="33dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/bulb1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:contentDescription="bulb"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/bulb" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="277dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Gas prices registered as lower at this location."
-                android:textColor="@color/cardview_light_background" />
-
-            <Button
-                android:id="@+id/detailsGas"
-                android:layout_width="57dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:text="Details"
-                android:textColor="@color/cardview_light_background"
-                android:textSize="7dp" />
-        </LinearLayout>
-
-
-    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/card2"
@@ -148,6 +105,50 @@
                 android:layout_marginTop="25dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="Add shopping"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="7dp" />
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="33dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/bulb1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="bulb"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/bulb" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="277dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Our customers seem to buy a lot at this location."
+                android:textColor="@color/cardview_light_background" />
+
+            <Button
+                android:id="@+id/detailsGas"
+                android:layout_width="57dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Details"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="7dp" />
         </LinearLayout>

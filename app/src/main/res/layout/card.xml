@@ -5,18 +5,45 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <fragment
-        android:id="@+id/map"
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"><fragment
+    android:id="@+id/map"
+    class="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/iuliusMall"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scrollbars="vertical"
-        class="com.google.android.gms.maps.SupportMapFragment"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/cardview_light_background"
+        android:text="Iulius Mall"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/iuliusInfo"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iuliusMall"
+        android:layout_marginLeft="300dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/cardview_light_background"
+        android:text="Strada Alexandru Vaida Voevod 53B, Cluj-Napoca 400436"
+        android:textSize="14dp" />
+
+</RelativeLayout>
 
     <android.support.v7.widget.CardView
         android:id="@+id/card6"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         app:cardBackgroundColor="@android:color/holo_orange_light"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +76,46 @@
     </LinearLayout>
 
     </android.support.v7.widget.CardView>
-    <com.jjoe64.graphview.GraphView
+
+    <TextView
+        android:id="@+id/barTitle"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:id="@+id/graph" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Past days trending in spendings at this location."
+        android:textSize="16dp"
+        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+            <view
+                android:id="@+id/bar_view"
+                class="im.dacer.androidcharts.BarView"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_margin="10dp" />
+
+
+        </HorizontalScrollView>
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="270dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/common_action_bar_splitter"
+            android:text="Mark as read"
+            android:textSize="12dp"
+           />
+    </RelativeLayout>
+
 </LinearLayout>

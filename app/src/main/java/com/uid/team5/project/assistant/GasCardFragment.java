@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -22,9 +24,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.uid.team5.project.R;
+
+import java.util.ArrayList;
+
+import im.dacer.androidcharts.BarView;
 
 /**
  * Created by marat on 14-Jan-18.
@@ -62,28 +70,18 @@ public class GasCardFragment extends Fragment implements OnMapReadyCallback {
         FragmentManager myFragmentManager = this.getChildFragmentManager();
         SupportMapFragment mapFragment = (SupportMapFragment) myFragmentManager.findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        GraphView graph = (GraphView) view.findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 3),
-                new DataPoint(2, 5),
+        BarView barView = (BarView)view.findViewById(R.id.bar_view);
+        ArrayList<String> str=new ArrayList<>();
+        str.add("Sat");str.add("Sun");str.add("Mon"); str.add("Tue"); str.add("Wed");
+        ArrayList<Integer> intLis=new ArrayList<>();
+        intLis.add(10); intLis.add(20); intLis.add(75);intLis.add(80);intLis.add(85);
 
-        });
-       /* series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-            @Override
-            public int get(DataPoint data) {
-                return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
-            }
-        });
-*/
-       // series.setSpacing(50);
+        barView.setBottomTextList(str);
+        barView.setDataList(intLis,100);
 
-// draw values on top
-       // series.setDrawValuesOnTop(true);
-      //  series.setValuesOnTopColor(Color.RED);
-        graph.addSeries(series);
         return view;
     }
+
     private void moveToCurrentLocation(LatLng currentLocation,GoogleMap googleMap)
     {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,15));
