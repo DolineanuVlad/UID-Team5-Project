@@ -1,6 +1,7 @@
 package com.uid.team5.project.shared;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity
 
     Toolbar mToolbar;
     private AppDataSingleton dataService;
+    private static final int ADD_EXPENSE_RESULT = 1;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -98,11 +100,11 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case R.id.navigation_add:
                     final AlertDialog popup = builder.create();
-                    View addExpensePopup = (View) getLayoutInflater().inflate(R.layout.popup_add_expense, null);
-                    Button scanReceipt = (Button) addExpensePopup.findViewById(R.id.scan_receipt);
-                    Button scanBarcode = (Button) addExpensePopup.findViewById(R.id.scan_barcode);
-                    Button manuallyInsert = (Button) addExpensePopup.findViewById(R.id.manual_insertion);
-                    Button cancelButton = (Button) addExpensePopup.findViewById(R.id.cancel_adding_expense);
+                    View addExpensePopup = getLayoutInflater().inflate(R.layout.popup_add_expense, null);
+                    Button scanReceipt = addExpensePopup.findViewById(R.id.scan_receipt);
+                    Button scanBarcode = addExpensePopup.findViewById(R.id.scan_barcode);
+                    Button manuallyInsert = addExpensePopup.findViewById(R.id.manual_insertion);
+                    Button cancelButton = addExpensePopup.findViewById(R.id.cancel_adding_expense);
 
 
 
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity
                         public void onClick(View v) {
                             popup.dismiss();
                             Intent intent = new Intent(MainActivity.this, ManualAdditionActivity.class);
-                            startActivity(intent);
+                            startActivityForResult(intent, ADD_EXPENSE_RESULT);
                         }
                     });
 
@@ -289,5 +291,16 @@ public class MainActivity extends AppCompatActivity
     protected void onStop() {
         AppDataSingleton.saveToFile(getApplicationContext());
         super.onStop();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == ADD_EXPENSE_RESULT) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                
+            }
+        }
     }
 }

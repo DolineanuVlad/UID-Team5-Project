@@ -5,45 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.uid.team5.project.add_expenses.ManualAdditionActivity"
+    android:theme="@style/AppTheme.Dark"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <ListView
         android:id="@+id/expense_list"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="420dp"
         android:padding="5dp"
-        android:transcriptMode="alwaysScroll"></ListView>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_a_new_expense"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/description"
-        android:id="@+id/new_expense_description"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/price"
-        android:id="@+id/new_expense_price"
-        android:inputType="number"
-        />
-
-    <Spinner
-        android:id="@+id/new_expense_category"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:entries="@array/category_arrays">
-    </Spinner>
+        android:transcriptMode="alwaysScroll" />
 
     <Button
         android:text="@string/add_expense"
@@ -51,7 +22,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:textAlignment="center"
         android:background="@color/colorPrimaryDark"
         android:textColor="@android:color/white"
