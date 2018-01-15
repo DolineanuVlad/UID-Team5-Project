@@ -35,6 +35,18 @@ public class Expense implements Serializable {
         this.createdByUser = AppDataSingleton.getInstance().getCurrentUserId();
     }
 
+    public Expense(int id, String description, float price, String category, int categoryPosition, UUID userId) {
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.categoryPosition = categoryPosition;
+        this.categoryImage = R.drawable.ic_train_black_24dp;
+        this.location = "";
+        this.date = Calendar.getInstance().getTime();
+        this.id = id;
+        this.createdByUser = userId;
+    }
+
     public Expense() {
     }
 

@@ -56,13 +56,23 @@ public class AppDataSingleton implements Serializable{
         users = new ArrayList<>();
 
         enabledAssistant=false;
-        //recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
-        //recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
 
-        //members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
-       // members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
+       if(expenses.size() == 0)
+       {
+           recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
+           recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
 
-        //expenses.add(new Expense(expenses.size(),"Example description", 52, "Lemne",1));
+           members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
+           members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
+
+           User user = new User("test@email.com", "password", "test");
+           users.add(user);
+
+           expenses.add(new Expense(expenses.size(),"asdsa dsadsa", 52, "Lemne",1, user.getId()));
+           expenses.add(new Expense(expenses.size(),"fdfsd ASD", 52, "Food",1, user.getId()));
+
+       }
+
     }
 
     public static AppDataSingleton getInstance()
@@ -74,6 +84,8 @@ public class AppDataSingleton implements Serializable{
 
         return instance;
     }
+
+
 
     public static void setInstance(AppDataSingleton mInstance)
     {
@@ -180,5 +192,19 @@ public class AppDataSingleton implements Serializable{
         }
 
         return usersExpenses;
+    }
+
+    public User getCurrentUser()
+    {
+        if(this.currentUserId != null)
+        {
+            for(User user: users)
+            {
+                if(user.getId().equals(this.currentUserId))
+                    return user;
+            }
+        }
+
+        return null;
     }
 }

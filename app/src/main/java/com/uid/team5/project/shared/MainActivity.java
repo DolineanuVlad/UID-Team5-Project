@@ -18,16 +18,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.WelcomeActivity;
 import com.uid.team5.project.add_expenses.ManualAdditionActivity;
 import com.uid.team5.project.assistant.GasCardFragment;
+import com.uid.team5.project.auth.LoginActivity;
 import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
 import com.uid.team5.project.bottom_nav_fragments.OverviewFragment;
 import com.uid.team5.project.bottom_nav_fragments.WishlistFragment;
 import com.uid.team5.project.helpers.BottomNavigationViewHelper;
+import com.uid.team5.project.models.User;
 import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesAddCategoryFragment;
 import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment.OnFragmentInteractionListener;
@@ -35,6 +38,8 @@ import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFra
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsAddPaymentFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsFragment;
 import com.uid.team5.project.transactions.TransactionsFragment;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -143,9 +148,37 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(mToolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        User currentUser = dataService.getCurrentUser();
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+                View headerView =  drawerView.findViewById(R.id.nav_drawer_head);
+                TextView userName =  headerView.findViewById(R.id.drawer_user_name);
+                TextView userEmail = headerView.findViewById(R.id.drawer_user_email);
+                userEmail.setText(dataService.getCurrentUser().getEmail());
+                userName.setText(dataService.getCurrentUser().getName());
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -198,7 +231,7 @@ public class MainActivity extends AppCompatActivity
         else if(id == R.id.menu_log_out)
         {
             dataService.setCurrentUserId(null);
-            startActivity(new Intent(this, WelcomeActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         }
         else if(id == R.id.menu_reset_app)
         {
