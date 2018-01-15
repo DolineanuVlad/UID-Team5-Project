@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#E43F3F</color>
-    <color name="colorPrimaryDark">#E12929</color>
-    <color name="primary_darker">#CC1D1D</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorPrimary">#21475b</color>
+    <color name="colorPrimaryDark">#b1be32</color>
+    <color name="primary_darker">#b1be32</color>
+    <color name="colorAccent">#b1be32</color>
 
+    <color name="green">#689F38</color>
     <color name="black">#000000</color>
-    <color name="jet">#222222</color>
+    <color name="jet">#b1be32</color>
     <color name="oil">#333333</color>
     <color name="monsoon">#777777</color>
     <color name="jumbo">#888888</color>
