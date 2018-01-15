@@ -25,6 +25,7 @@ import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.WelcomeActivity;
 import com.uid.team5.project.add_expenses.ManualAdditionActivity;
+import com.uid.team5.project.add_expenses.ScanReceiptActivity;
 import com.uid.team5.project.assistant.GasCardFragment;
 import com.uid.team5.project.auth.LoginActivity;
 import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
@@ -120,6 +121,15 @@ public class MainActivity extends AppCompatActivity
                         public void onClick(View v) {
                             popup.dismiss();
                             Intent intent = new Intent(MainActivity.this, ManualAdditionActivity.class);
+                            startActivityForResult(intent, ADD_EXPENSE_RESULT);
+                        }
+                    });
+
+                    scanReceipt.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popup.dismiss();
+                            Intent intent = new Intent(MainActivity.this, ScanReceiptActivity.class);
                             startActivityForResult(intent, ADD_EXPENSE_RESULT);
                         }
                     });
@@ -299,7 +309,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == ADD_EXPENSE_RESULT) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                
+
             }
         }
     }

@@ -146,6 +146,12 @@ public class AppDataSingleton implements Serializable{
         return expenses;
     }
 
+    public void fakeScanningRecipe() {
+        expenses.add(new Expense(expenses.size(), "Item 1", 123.4f, "Food", 1));
+        expenses.add(new Expense(expenses.size(), "Item 2", 123.4f, "Food", 1));
+        expenses.add(new Expense(expenses.size(), "Item 3", 123.4f, "Food", 1));
+    }
+
     public void setExpenses(ArrayList<Expense> expenses) {
         this.expenses = expenses;
     }
