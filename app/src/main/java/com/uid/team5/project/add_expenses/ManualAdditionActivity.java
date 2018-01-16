@@ -1,5 +1,7 @@
 package com.uid.team5.project.add_expenses;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -8,12 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.AddExpensesAdapter;
 import com.uid.team5.project.models.Expense;
+import com.uid.team5.project.transactions.EditTransactionActivity;
 
 public class ManualAdditionActivity extends AppCompatActivity {
 
@@ -21,13 +25,17 @@ public class ManualAdditionActivity extends AppCompatActivity {
     Button cancelButton;
     AddExpensesAdapter adapter;
     AppDataSingleton dataService;
+    AlertDialog.Builder builder;
+    AlertDialog popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_addition);
         dataService = AppDataSingleton.getInstance();
-//        expensesList.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+
+        builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.popup_expense_insertion);
         expensesList = findViewById(R.id.expense_list);
         cancelButton = findViewById(R.id.cancel_adding_expense);
         adapter = new AddExpensesAdapter(this);
@@ -42,22 +50,40 @@ public class ManualAdditionActivity extends AppCompatActivity {
     }
 
     public void onAddExpense(View w) {
-        EditText descriptionText = findViewById(R.id.new_expense_description);
-        String description = descriptionText.getText().toString();
+        popup = builder.show();
+    }
 
-        EditText priceText = findViewById(R.id.new_expense_price);
-        float price = Float.parseFloat(priceText.getText().toString());
+    public void onExpenseAdded(View v) {
+        TextView description = popup.findViewById(R.id.new_expense_description);
+        TextView price = popup.findViewById(R.id.new_expense_price);
+        Spinner category = popup.findViewById(R.id.new_expense_category);
 
-        Spinner categorySpinner = findViewById(R.id.new_expense_category);
-        String category = categorySpinner.getSelectedItem().toString();
-        int categoryPosition = categorySpinner.getSelectedItemPosition();
+        String descString = description.getText().toString();
+        String priceString = price.getText().toString();
 
-        dataService.currentInserionOfExpenses.add(new Expense(dataService.getExpenses().size(), description, price, category, categoryPosition));
+        if (descString.equals("") || priceString.equals("")) {
+            popup.dismiss();
+            return;
+        }
+
+        float priceFloat = Float.parseFloat(priceString);
+        String categoryString = category.getSelectedItem().toString();
+        int categoryPosition = category.getSelectedItemPosition();
+
+
+
+        dataService.currentInserionOfExpenses.add(new Expense(dataService.getExpenses().size(), descString, priceFloat, categoryString, categoryPosition));
         adapter.notifyDataSetChanged();
 
-        descriptionText.setText(null);
-        priceText.setText(null);
-        categorySpinner.setSelection(0);
+        description.setText(null);
+        price.setText(null);
+        category.setSelection(0);
+
+        popup.dismiss();
+    }
+
+    public void onPopupCancel(View v) {
+        popup.dismiss();
     }
 
     public void onConfirm(View v) {
