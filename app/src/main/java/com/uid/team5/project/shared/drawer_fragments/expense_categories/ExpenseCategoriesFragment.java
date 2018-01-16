@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import java.util.List;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.ExpenseCategoryAdapter;
 import com.uid.team5.project.models.ExpenseCategory;
@@ -34,7 +35,7 @@ public class ExpenseCategoriesFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private ExpenseCategoryService expenseCategoryService;
     List<ExpenseCategory> mlist;
-
+    AppDataSingleton appData;
     public ExpenseCategoriesFragment() {
         // Required empty public constructor
     }
@@ -55,7 +56,7 @@ public class ExpenseCategoriesFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        mlist=expenseCategoryService.getExpenses();
+        appData = AppDataSingleton.getInstance();
         super.onCreate(savedInstanceState);
     }
 
@@ -67,7 +68,7 @@ public class ExpenseCategoriesFragment extends Fragment {
 
         mListView = (ListView) rootView.findViewById(R.id.expensesList);
 
-        ExpenseCategoryAdapter adapter = new ExpenseCategoryAdapter(mlist, this.getContext());
+        ExpenseCategoryAdapter adapter = new ExpenseCategoryAdapter(appData.getExpenseCategories(), this.getContext());
         mListView.setAdapter(adapter);
 
         mAddCategory = (FloatingActionButton)rootView.findViewById(R.id.floatingActionButtonAddExpense);

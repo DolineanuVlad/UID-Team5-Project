@@ -1,22 +1,32 @@
 package com.uid.team5.project.shared.drawer_fragments.family_group;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.FamilyGroupAdapter;
-import com.uid.team5.project.models.Member;
+import com.uid.team5.project.add_expenses.ManualAdditionActivity;
 
-import java.util.ArrayList;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,13 +37,14 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class FamilyGroupFragment extends Fragment {
-
+    private Context mContext;
     private OnFragmentInteractionListener mListener;
     private ListView mListView;
     private FloatingActionButton mAddMember;
-
+    private ImageButton mButton;
     AppDataSingleton appData;
-
+    private PopupWindow mPopupWindow;
+    private RelativeLayout rl;
     public FamilyGroupFragment() {
         // Required empty public constructor
     }
@@ -57,11 +68,10 @@ public class FamilyGroupFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         appData = AppDataSingleton.getInstance();
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_family_group, container, false);
@@ -72,7 +82,6 @@ public class FamilyGroupFragment extends Fragment {
         mListView.setAdapter(adapter);
 
         mAddMember = (FloatingActionButton)rootView.findViewById(R.id.floatingActionButtonAddMember);
-
         mAddMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,10 +89,41 @@ public class FamilyGroupFragment extends Fragment {
             }
         });
 
+        View viewForEdit= inflater.inflate(R.layout.family_member_list_item, container, false);
+        mButton=(ImageButton) viewForEdit.findViewById(R.id.family_group_list_item_edit);
+        rl=(RelativeLayout) viewForEdit.findViewById(R.id.rl);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openPopup(view);
+            }
+        });
 
         return rootView;
     }
 
+    private void openPopup(View view) {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final AlertDialog popup = builder.create();
+        View optionsPopup = (View) getLayoutInflater().inflate(R.layout.poput_layout, null);
+        Button income = (Button) optionsPopup.findViewById(R.id.incomeB);
+        Button budget = (Button) optionsPopup.findViewById(R.id.budgetB);
+        Button cancelButton = (Button) optionsPopup.findViewById(R.id.cancelB);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.dismiss();
+            }
+        });
+
+
+        popup.setTitle(null);
+        popup.setView(optionsPopup);
+        popup.show();
+    }
     private void openAddMemberView(View view) {
 
         Fragment addMemberFragment = FamilyGroupAddMemberFragment.newInstance();

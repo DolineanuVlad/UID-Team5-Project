@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uid.team5.project.R;
@@ -48,10 +49,11 @@ public class ExpenseCategoryAdapter extends BaseAdapter {
 
         TextView expenseName= (TextView) myRow.findViewById(R.id.expenseName);
         TextView expenseDescription = (TextView) myRow.findViewById(R.id.expenseDescription);
-
+        ImageView expenseIcon=(ImageView) myRow.findViewById(R.id.expenseImage);
 
         expenseName.setText(expenses.get(position).getName());
         expenseDescription.setText(expenses.get(position).getDescription());
+        expenseIcon.setImageResource(expenses.get(position).getIcon());
         return myRow;
     }
 }

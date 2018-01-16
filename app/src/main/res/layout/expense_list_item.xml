@@ -5,11 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="85dp">
 
-
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/expenseImage"
+        android:layout_width="80dp"
+        android:layout_height="82dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="9dp" />
     <TextView
         android:id="@+id/expenseName"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/expenseImage"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="14dp"
+        android:layout_toEndOf="@+id/expenseImage"
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -17,8 +31,9 @@
 
     <TextView
         android:id="@+id/expenseDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/expenseName"
         android:layout_below="@+id/expenseName"
         android:text="TextView" />
 </android.widget.RelativeLayout>
