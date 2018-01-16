@@ -34,6 +34,26 @@ public class AppDataSingleton implements Serializable {
     private UUID currentUserId;
     private ArrayList<User> users;
 
+    public int getCurrentGroup() {
+        return currentGroup;
+    }
+
+    public void setCurrentGroup(int currentGroup) {
+        this.currentGroup = currentGroup;
+    }
+
+    private int currentGroup;
+
+    public ArrayList<Integer> getGroupsList() {
+        return groupsList;
+    }
+
+    public void setGroupsList(ArrayList<Integer> groupsList) {
+        this.groupsList = groupsList;
+    }
+
+    private ArrayList<Integer> groupsList;
+
     private ArrayList<ExpenseCategory> expenseCategories;
 
     public AppDataSingleton() {
@@ -43,6 +63,7 @@ public class AppDataSingleton implements Serializable {
         currentInserionOfExpenses = new ArrayList<>();
         users = new ArrayList<>();
         expenseCategories = new ArrayList<>();
+        groupsList = new ArrayList<>();
 
         enabledAssistant = false;
 
