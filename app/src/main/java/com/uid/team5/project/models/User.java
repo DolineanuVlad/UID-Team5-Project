@@ -1,5 +1,7 @@
 package com.uid.team5.project.models;
 
+import com.uid.team5.project.R;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -13,6 +15,17 @@ public class User implements Serializable {
     private String password;
     private String name;
     private UUID id;
+    private int groupId;
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
+    }
+
+    private int avatar;
 
     public User(String email, String password, String name)
     {
@@ -20,6 +33,8 @@ public class User implements Serializable {
         this.password = password;
         this.id = UUID.randomUUID();
         this.name = name;
+        this.avatar = R.drawable.ic_avatar_person;
+        groupId = 0;
     }
 
     public String getName() {

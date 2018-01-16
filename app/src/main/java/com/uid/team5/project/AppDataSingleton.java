@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.uid.team5.project.models.Expense;
 import com.uid.team5.project.models.ExpenseCategory;
-import com.uid.team5.project.models.Income;
 import com.uid.team5.project.models.Member;
 import com.uid.team5.project.models.RecurringPayment;
 import com.uid.team5.project.models.User;
@@ -29,22 +28,33 @@ public class AppDataSingleton implements Serializable {
     public ArrayList<Expense> expenses;
     public ArrayList<Expense> currentInserionOfExpenses;
     private ArrayList<RecurringPayment> recurringPayments;
-    public ArrayList<Income> incomes;
     private boolean enabledAssistant;
     private ArrayList<Member> members;
     private Expense CurrentlyEditted;
     private UUID currentUserId;
     private ArrayList<User> users;
 
+    public int getCurrentGroup() {
+        return currentGroup;
+    }
+
+    public void setCurrentGroup(int currentGroup) {
+        this.currentGroup = currentGroup;
+    }
+
+    private int currentGroup;
+
+    public ArrayList<Integer> getGroupsList() {
+        return groupsList;
+    }
+
+    public void setGroupsList(ArrayList<Integer> groupsList) {
+        this.groupsList = groupsList;
+    }
+
+    private ArrayList<Integer> groupsList;
+
     private ArrayList<ExpenseCategory> expenseCategories;
-
-    public ArrayList<Income> getIncomes() {
-        return incomes;
-    }
-
-    public void setIncomes(ArrayList<Income> incomes) {
-        this.incomes = incomes;
-    }
 
     public AppDataSingleton() {
         recurringPayments = new ArrayList<>();
@@ -53,7 +63,7 @@ public class AppDataSingleton implements Serializable {
         currentInserionOfExpenses = new ArrayList<>();
         users = new ArrayList<>();
         expenseCategories = new ArrayList<>();
-        incomes=new ArrayList<>();
+        groupsList = new ArrayList<>();
 
         enabledAssistant = false;
 
@@ -67,8 +77,8 @@ public class AppDataSingleton implements Serializable {
             User user = new User("test@email.com", "password", "test");
             users.add(user);
 
-            expenses.add(new Expense(expenses.size(), "expense1", 52, "Lemne", 1, user.getId()));
-            expenses.add(new Expense(expenses.size(), "expense2", 52, "Food", 1, user.getId()));
+            expenses.add(new Expense(expenses.size(), "asdsa dsadsa", 52, "Lemne", 1, user.getId()));
+            expenses.add(new Expense(expenses.size(), "fdfsd ASD", 52, "Food", 1, user.getId()));
 
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Food","Category for all types of food", R.drawable.icons8_food_and_wine ));
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Personal Car","Car maintainance, gas", R.drawable.icons8_shopping_cart ));
@@ -76,10 +86,6 @@ public class AppDataSingleton implements Serializable {
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Public Transport","Public transportation", R.drawable.icons8_transportation ));
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Vacation","Vacations", R.drawable.icons8_travel ));
 
-
-
-            incomes.add(new Income("salary", "2000", "monthly"));
-            incomes.add(new Income("rent", "20", "weekly"));
         }
 
     }

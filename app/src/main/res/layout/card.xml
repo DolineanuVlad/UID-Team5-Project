@@ -23,6 +23,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/cardview_light_background"
         android:text="Iulius Mall"
+        android:textColor="@color/colorPrimary"
         android:textSize="16dp"
         android:textStyle="bold" />
 
@@ -30,11 +31,12 @@
         android:id="@+id/iuliusInfo"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/iuliusMall"
         android:layout_below="@+id/iuliusMall"
-        android:layout_marginLeft="300dp"
-        android:layout_marginRight="10dp"
         android:background="@color/cardview_light_background"
+        android:backgroundTint="@color/cardview_light_background"
         android:text="Strada Alexandru Vaida Voevod 53B, Cluj-Napoca 400436"
+        android:textColor="@color/colorPrimary"
         android:textSize="14dp" />
 
 </RelativeLayout>

@@ -201,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity  {
         private final String mEmail;
         private final String mPassword;
         private final String mName;
-
+        private User newUser;
 
         UserRegisterTask(String email, String password, String name) {
             mEmail = email;
@@ -229,8 +229,9 @@ public class RegisterActivity extends AppCompatActivity  {
                     return false;
             }
 
-            User newUser = new User(mEmail, mPassword, mName);
+            newUser = new User(mEmail, mPassword, mName);
             users.add(newUser);
+            dataService.setCurrentUserId(newUser.getId());
             return true;
         }
 
@@ -240,7 +241,8 @@ public class RegisterActivity extends AppCompatActivity  {
             showProgress(false);
 
             if (success) {
-                finish();
+                //finish();
+                startActivity(new Intent(RegisterActivity.this, ChooseGroupActivity.class));
             } else {
                 mEmailView.setError("Email address is taken");
                 mEmailView.requestFocus();

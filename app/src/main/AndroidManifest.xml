@@ -53,6 +53,11 @@
             android:value="AIzaSyDiOxQIhqQw3yiulcPDf1jvk6JC2PgouM0" />
 
         <activity android:name=".add_expenses.ScanReceiptActivity" />
+        <activity
+            android:name=".auth.ChooseGroupActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity android:name=".auth.CreateGroupActivity"            android:theme="@style/AppTheme.Dark" />
+
     </application>
 
 </manifest>

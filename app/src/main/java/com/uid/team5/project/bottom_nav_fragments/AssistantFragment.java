@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -61,8 +62,8 @@ private boolean enabled;
                              Bundle savedInstanceState) {
         View view=(View)inflater.inflate(R.layout.fragment_assistant, container, false);
         Switch onOffSwitch = (Switch)  view.findViewById(R.id.enableAssistant);
-        Button addBtn=(Button)view.findViewById(R.id.addShopping);
-        Button details=(Button)view.findViewById(R.id.detailsGas);
+        ImageButton addBtn=(ImageButton)view.findViewById(R.id.addShopping);
+        ImageButton details=(ImageButton)view.findViewById(R.id.detailsGas);
         if (AppDataSingleton.getInstance().isEnabledAssistant()){
             onOffSwitch.setChecked(true);
             view.findViewById(R.id.cards).setVisibility(View.VISIBLE);

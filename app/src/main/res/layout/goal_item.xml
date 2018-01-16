@@ -1,39 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <EditText
+    <ImageView
+        android:id="@+id/transactions_item_category_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="26dp"
+        android:tint="@color/common_signin_btn_default_background"
+        app:srcCompat="@drawable/ic_favorite_border_black_24dp" />
+
+    <TextView
         android:id="@+id/goalName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="8"
-        android:inputType="textPersonName"
-        android:text="New Car" />
+        android:layout_alignTop="@+id/transactions_item_category_image"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/transactions_item_category_image"
+        android:text="New car"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
-    <EditText
+    <TextView
         android:id="@+id/goalPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="2"
-        android:inputType="textPersonName"
-        android:text="1" />
+        android:layout_alignBottom="@+id/goalName"
+        android:layout_toStartOf="@+id/goalOpen"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/goalStatus"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_alignBottom="@+id/transactions_item_category_image"
+        android:layout_alignEnd="@+id/goalName"
+        android:layout_alignStart="@+id/goalName"
         android:layout_weight="1" />
 
-    <Button
+    <ImageButton
         android:id="@+id/goalOpen"
-        android:layout_width="62dp"
-        android:layout_height="36dp"
-        android:layout_weight="1"
-        android:text="Open" />
-</LinearLayout>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/goalName"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/ic_open_in_new_white_24dp"
+        android:text="TextView"
+        android:textSize="12sp" />
+
+</RelativeLayout>
