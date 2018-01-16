@@ -7,8 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.models.ExpenseCategory;
+import com.uid.team5.project.models.Member;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +27,7 @@ import com.uid.team5.project.R;
  * create an instance of this fragment.
  */
 public class ExpenseCategoriesAddCategoryFragment extends Fragment {
-
+    AppDataSingleton appData;
 
     private OnFragmentInteractionListener mListener;
 
@@ -37,19 +45,43 @@ public class ExpenseCategoriesAddCategoryFragment extends Fragment {
     public static ExpenseCategoriesAddCategoryFragment newInstance() {
         ExpenseCategoriesAddCategoryFragment fragment = new ExpenseCategoriesAddCategoryFragment();
         Bundle args = new Bundle();
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        appData = AppDataSingleton.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_expense_categories_add_category, container, false);
+        final View rootView =  inflater.inflate(R.layout.fragment_expense_categories_add_category,
+                container, false);
+
+        Button saveButton  = rootView.findViewById(R.id.addCategoryB);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addExpenseAndReturn(rootView);
+            }
+        });
+        return rootView;
+
+    }
+
+    private void addExpenseAndReturn(View rootView) {
+        TextView name = (TextView)rootView.findViewById(R.id.categoryNameField);
+        TextView description = (TextView)rootView.findViewById(R.id.categoryDescriptionField);
+        ArrayList<ExpenseCategory> ecs = appData.getExpenseCategories();
+        ExpenseCategory ec=new ExpenseCategory(ecs.size(), name.getText().toString(), description.getText().toString(), R.drawable.ic_money);
+        ecs.add(ec);
+        getFragmentManager().popBackStack();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
