@@ -10,14 +10,14 @@ import java.util.List;
  */
 
 public class IncomeService {
-    public static List<Income> getExpenses(){
+    public static List<Income> getIncomes(){
         List<Income> expenses=new ArrayList<Income>();
 
-        Income e1=new Income("salary", "2000", "monthly");
+        /*Income e1=new Income("salary", "2000", "monthly");
         Income e2=new Income("rent", "20", "weekly");
 
         expenses.add(e1);
-        expenses.add(e2);
+        expenses.add(e2);*/
 
         return expenses;
     }

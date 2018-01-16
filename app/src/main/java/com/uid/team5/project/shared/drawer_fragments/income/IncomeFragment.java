@@ -1,41 +1,36 @@
-package com.uid.team5.project.shared.drawer_fragments.expense_categories;
+package com.uid.team5.project.shared.drawer_fragments.income;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import java.util.List;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.ExpenseCategoryAdapter;
-import com.uid.team5.project.models.ExpenseCategory;
-import com.uid.team5.project.services.ExpenseCategoryService;
+import com.uid.team5.project.adapters.IncomeAdapter;
+import com.uid.team5.project.models.Income;
+import com.uid.team5.project.services.IncomeService;
+import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesAddCategoryFragment;
+
+import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ExpenseCategoriesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ExpenseCategoriesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ExpenseCategoriesFragment extends Fragment {
-
+public class IncomeFragment extends Fragment {
     private ListView mListView;
     private FloatingActionButton mAddCategory;
     private OnFragmentInteractionListener mListener;
-    private ExpenseCategoryService expenseCategoryService;
-    List<ExpenseCategory> mlist;
+    private IncomeService incomeService;
+    List<Income> mlist;
     AppDataSingleton appData;
-    public ExpenseCategoriesFragment() {
+
+    public IncomeFragment() {
         // Required empty public constructor
     }
 
@@ -43,13 +38,12 @@ public class ExpenseCategoriesFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment ExpenseCategoriesFragment.
+
      */
     // TODO: Rename and change types and number of parameters
-    public static ExpenseCategoriesFragment newInstance() {
-        ExpenseCategoriesFragment fragment = new ExpenseCategoriesFragment();
+    public static IncomeFragment newInstance() {
+        IncomeFragment fragment = new IncomeFragment();
         Bundle args = new Bundle();
-
         return fragment;
     }
 
@@ -63,11 +57,11 @@ public class ExpenseCategoriesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_expense_categories, container, false);
+        View rootView =  inflater.inflate(R.layout.fragment_income, container, false);
 
-        mListView = (ListView) rootView.findViewById(R.id.expensesList);
+        mListView = (ListView) rootView.findViewById(R.id.incomeList);
 
-        ExpenseCategoryAdapter adapter = new ExpenseCategoryAdapter(appData.getExpenseCategories(), this.getContext());
+        IncomeAdapter adapter = new IncomeAdapter(appData.getIncomes(), this.getContext());
         mListView.setAdapter(adapter);
 
         mAddCategory = (FloatingActionButton)rootView.findViewById(R.id.floatingActionButtonAddExpense);
@@ -75,18 +69,16 @@ public class ExpenseCategoriesFragment extends Fragment {
         mAddCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openAddCategoryView(view);
+                openAddIncomeView(view);
             }
         });
-
-
         return rootView;
     }
 
-    private void openAddCategoryView(View view) {
-        Fragment addCategoryFragmnet = ExpenseCategoriesAddCategoryFragment.newInstance();
+    private void openAddIncomeView(View view) {
+        Fragment addIncomeFragment = IncomeAddFragment.newInstance();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_frame_layout, addCategoryFragmnet);
+        transaction.replace(R.id.main_frame_layout, addIncomeFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

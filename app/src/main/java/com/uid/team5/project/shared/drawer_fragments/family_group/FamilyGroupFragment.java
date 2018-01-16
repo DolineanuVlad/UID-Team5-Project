@@ -89,7 +89,7 @@ public class FamilyGroupFragment extends Fragment {
             }
         });
 
-        View viewForEdit= inflater.inflate(R.layout.family_member_list_item, container, false);
+        /*View viewForEdit= inflater.inflate(R.layout.family_member_list_item, container, false);
         mButton=(ImageButton) viewForEdit.findViewById(R.id.family_group_list_item_edit);
         rl=(RelativeLayout) viewForEdit.findViewById(R.id.rl);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -99,11 +99,11 @@ public class FamilyGroupFragment extends Fragment {
                 openPopup(view);
             }
         });
-
+*/
         return rootView;
     }
 
-    private void openPopup(View view) {
+    /*private void openPopup(View view) {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -123,7 +123,7 @@ public class FamilyGroupFragment extends Fragment {
         popup.setTitle(null);
         popup.setView(optionsPopup);
         popup.show();
-    }
+    }*/
     private void openAddMemberView(View view) {
 
         Fragment addMemberFragment = FamilyGroupAddMemberFragment.newInstance();

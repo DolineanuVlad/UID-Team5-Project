@@ -1,41 +1,32 @@
-package com.uid.team5.project.shared.drawer_fragments.expense_categories;
+package com.uid.team5.project.shared.drawer_fragments.income;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import java.util.List;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
-import com.uid.team5.project.adapters.ExpenseCategoryAdapter;
 import com.uid.team5.project.models.ExpenseCategory;
-import com.uid.team5.project.services.ExpenseCategoryService;
+import com.uid.team5.project.models.Income;
+import com.uid.team5.project.models.Member;
+import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesAddCategoryFragment;
+
+import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ExpenseCategoriesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ExpenseCategoriesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ExpenseCategoriesFragment extends Fragment {
-
-    private ListView mListView;
-    private FloatingActionButton mAddCategory;
-    private OnFragmentInteractionListener mListener;
-    private ExpenseCategoryService expenseCategoryService;
-    List<ExpenseCategory> mlist;
+public class IncomeAddFragment extends Fragment {
     AppDataSingleton appData;
-    public ExpenseCategoriesFragment() {
+
+    private OnFragmentInteractionListener mListener;
+
+    public IncomeAddFragment() {
         // Required empty public constructor
     }
 
@@ -43,52 +34,50 @@ public class ExpenseCategoriesFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment ExpenseCategoriesFragment.
+     * @return A new instance of fragment ExpenseCategoriesAddCategoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExpenseCategoriesFragment newInstance() {
-        ExpenseCategoriesFragment fragment = new ExpenseCategoriesFragment();
+    public static IncomeAddFragment newInstance() {
+        IncomeAddFragment fragment = new IncomeAddFragment();
         Bundle args = new Bundle();
-
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        appData = AppDataSingleton.getInstance();
+
         super.onCreate(savedInstanceState);
+        appData = AppDataSingleton.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_expense_categories, container, false);
+        final View rootView =  inflater.inflate(R.layout.fragment_income_add,
+                container, false);
 
-        mListView = (ListView) rootView.findViewById(R.id.expensesList);
+        Button saveButton  = rootView.findViewById(R.id.addIncomeB);
 
-        ExpenseCategoryAdapter adapter = new ExpenseCategoryAdapter(appData.getExpenseCategories(), this.getContext());
-        mListView.setAdapter(adapter);
-
-        mAddCategory = (FloatingActionButton)rootView.findViewById(R.id.floatingActionButtonAddExpense);
-
-        mAddCategory.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openAddCategoryView(view);
+                addIncomeAndReturn(rootView);
             }
         });
-
-
         return rootView;
+
     }
 
-    private void openAddCategoryView(View view) {
-        Fragment addCategoryFragmnet = ExpenseCategoriesAddCategoryFragment.newInstance();
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_frame_layout, addCategoryFragmnet);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void addIncomeAndReturn(View rootView) {
+        TextView name = (TextView)rootView.findViewById(R.id.incomeNameField);
+        Spinner occurance = (Spinner) rootView.findViewById(R.id.incomeOccuranceField);
+        TextView value = (TextView)rootView.findViewById(R.id.incomeValueField);
+        ArrayList<Income> incomes = appData.getIncomes();
+        Income income=new Income(name.getText().toString(), value.getText().toString(), occurance.getSelectedItem().toString());
+        incomes.add(income);
+        getFragmentManager().popBackStack();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

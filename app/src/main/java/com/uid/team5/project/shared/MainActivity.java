@@ -1,7 +1,6 @@
 package com.uid.team5.project.shared;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,11 +36,11 @@ import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseC
 import com.uid.team5.project.shared.drawer_fragments.expense_categories.ExpenseCategoriesFragment;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupAddMemberFragment.OnFragmentInteractionListener;
 import com.uid.team5.project.shared.drawer_fragments.family_group.FamilyGroupFragment;
+import com.uid.team5.project.shared.drawer_fragments.income.IncomeAddFragment;
+import com.uid.team5.project.shared.drawer_fragments.income.IncomeFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsAddPaymentFragment;
 import com.uid.team5.project.shared.drawer_fragments.recurring_payments.RecurringPaymentsFragment;
 import com.uid.team5.project.transactions.TransactionsFragment;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -58,6 +57,7 @@ public class MainActivity extends AppCompatActivity
         RecurringPaymentsAddPaymentFragment.OnFragmentInteractionListener,
         ExpenseCategoriesAddCategoryFragment.OnFragmentInteractionListener,
         ExpenseCategoriesFragment.OnFragmentInteractionListener,
+        IncomeFragment.OnFragmentInteractionListener, IncomeAddFragment.OnFragmentInteractionListener,
         GasCardFragment.OnFragmentInteractionListener{
 
     Toolbar mToolbar;
