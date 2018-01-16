@@ -1,13 +1,35 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.uid.team5.project.bottom_nav_fragments.OverviewFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Overview fragment" />
+        android:layout_above="@+id/overall" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:max="200"
+        android:paddingBottom="12dp"
+        android:text="Total expenses  2000 LEI"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/overall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/total"
+        android:layout_centerHorizontal="true"
+        android:max="25"
+        android:paddingBottom="12dp"
+        android:text="BALANCE 2000 LEI"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="20dp" />
+</RelativeLayout>
