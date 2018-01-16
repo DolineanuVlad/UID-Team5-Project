@@ -30,6 +30,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.google.android.gms:play-services-maps:6.5.87'
     compile 'im.dacer:AndroidCharts:1.0.4'
+    compile 'com.jaredrummler:material-spinner:1.2.4'
     compile 'com.jjoe64:graphview:4.2.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
