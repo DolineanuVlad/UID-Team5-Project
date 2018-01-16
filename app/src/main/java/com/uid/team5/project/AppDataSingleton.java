@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.uid.team5.project.models.Expense;
 import com.uid.team5.project.models.ExpenseCategory;
+import com.uid.team5.project.models.Income;
 import com.uid.team5.project.models.Member;
 import com.uid.team5.project.models.RecurringPayment;
 import com.uid.team5.project.models.User;
@@ -33,7 +34,7 @@ public class AppDataSingleton implements Serializable {
     private Expense CurrentlyEditted;
     private UUID currentUserId;
     private ArrayList<User> users;
-
+    private ArrayList<Income> incomes;
     public int getCurrentGroup() {
         return currentGroup;
     }
@@ -64,7 +65,7 @@ public class AppDataSingleton implements Serializable {
         users = new ArrayList<>();
         expenseCategories = new ArrayList<>();
         groupsList = new ArrayList<>();
-
+        incomes=new ArrayList<>();
         enabledAssistant = false;
 
         if (expenses.size() == 0) {
@@ -86,6 +87,7 @@ public class AppDataSingleton implements Serializable {
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Public Transport","Public transportation", R.drawable.icons8_transportation ));
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Vacation","Vacations", R.drawable.icons8_travel ));
 
+            incomes.add(new Income("salary", "200", "weekly"));
         }
 
     }
