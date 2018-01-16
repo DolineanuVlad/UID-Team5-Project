@@ -24,6 +24,7 @@ import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.WelcomeActivity;
 import com.uid.team5.project.add_expenses.ManualAdditionActivity;
+import com.uid.team5.project.add_expenses.ScanBarcodeActivity;
 import com.uid.team5.project.add_expenses.ScanReceiptActivity;
 import com.uid.team5.project.assistant.GasCardFragment;
 import com.uid.team5.project.auth.LoginActivity;
@@ -130,6 +131,15 @@ public class MainActivity extends AppCompatActivity
                         public void onClick(View v) {
                             popup.dismiss();
                             Intent intent = new Intent(MainActivity.this, ScanReceiptActivity.class);
+                            startActivityForResult(intent, ADD_EXPENSE_RESULT);
+                        }
+                    });
+
+                    scanBarcode.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popup.dismiss();
+                            Intent intent = new Intent(MainActivity.this, ScanBarcodeActivity.class);
                             startActivityForResult(intent, ADD_EXPENSE_RESULT);
                         }
                     });

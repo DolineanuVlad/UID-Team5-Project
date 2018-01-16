@@ -82,8 +82,9 @@ public class AppDataSingleton implements Serializable {
             expenses.add(new Expense(expenses.size(), "fdfsd ASD", 52, "Food", 1, user.getId()));
 
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Food","Category for all types of food", R.drawable.icons8_food_and_wine ));
+            expenseCategories.add(new ExpenseCategory(expenseCategories.size(), "House", "Category for house related expenses", R.drawable.icons8_house_50));
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Personal Car","Car maintainance, gas", R.drawable.icons8_shopping_cart ));
-            expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Children","Price for carring for children", R.drawable.icons8_baby ));
+            expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Children","Price for caring for children", R.drawable.icons8_baby ));
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Public Transport","Public transportation", R.drawable.icons8_transportation ));
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Vacation","Vacations", R.drawable.icons8_travel ));
 
@@ -174,9 +175,10 @@ public class AppDataSingleton implements Serializable {
     }
 
     public void fakeScanningRecipe() {
-        expenses.add(new Expense(expenses.size(), "Item 1", 123.4f, "Food", 1));
-        expenses.add(new Expense(expenses.size(), "Item 2", 123.4f, "Food", 1));
-        expenses.add(new Expense(expenses.size(), "Item 3", 123.4f, "Food", 1));
+        currentInserionOfExpenses.clear();
+        currentInserionOfExpenses.add(new Expense(expenses.size(), "Water", 2.5f, "Food", 0));
+        currentInserionOfExpenses.add(new Expense(expenses.size(), "Bread", 3f, "Food", 0));
+        currentInserionOfExpenses.add(new Expense(expenses.size(), "Coca Cola", 6.2f, "Food", 0));
     }
 
     public void setExpenses(ArrayList<Expense> expenses) {
@@ -218,6 +220,10 @@ public class AppDataSingleton implements Serializable {
 
     public boolean isEnabledAssistant() {
         return enabledAssistant;
+    }
+
+    public ArrayList<Income> getIncomes() {
+        return incomes;
     }
 
     public void setEnabledAssistant(boolean enabledAssistant) {

@@ -1,13 +1,11 @@
 package com.uid.team5.project.add_expenses;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,8 +14,8 @@ import android.widget.Toast;
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.adapters.AddExpensesAdapter;
+import com.uid.team5.project.adapters.ExpensesCategoriesSpinnerAdapter;
 import com.uid.team5.project.models.Expense;
-import com.uid.team5.project.transactions.EditTransactionActivity;
 
 public class ManualAdditionActivity extends AppCompatActivity {
 
@@ -35,7 +33,13 @@ public class ManualAdditionActivity extends AppCompatActivity {
         dataService = AppDataSingleton.getInstance();
 
         builder = new AlertDialog.Builder(this);
-        builder.setView(R.layout.popup_expense_insertion);
+        popup = builder.create();
+        View v = getLayoutInflater().inflate(R.layout.popup_expense_insertion, null);
+        Spinner spinner = v.findViewById(R.id.new_expense_category);
+        ExpensesCategoriesSpinnerAdapter ecsp = new ExpensesCategoriesSpinnerAdapter(dataService.getExpenseCategories(),this);
+        spinner.setAdapter(ecsp);
+        popup.setView(v);
+
         expensesList = findViewById(R.id.expense_list);
         cancelButton = findViewById(R.id.cancel_adding_expense);
         adapter = new AddExpensesAdapter(this);
@@ -50,7 +54,7 @@ public class ManualAdditionActivity extends AppCompatActivity {
     }
 
     public void onAddExpense(View w) {
-        popup = builder.show();
+        popup.show();
     }
 
     public void onExpenseAdded(View v) {
@@ -68,7 +72,7 @@ public class ManualAdditionActivity extends AppCompatActivity {
 
         float priceFloat = Float.parseFloat(priceString);
         String categoryString = category.getSelectedItem().toString();
-        int categoryPosition = category.getSelectedItemPosition();
+        int categoryPosition = (int)category.getSelectedItemId();
 
 
 

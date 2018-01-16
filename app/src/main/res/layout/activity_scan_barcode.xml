@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.uid.team5.project.add_expenses.ScanReceiptActivity"
+    tools:context="com.uid.team5.project.add_expenses.ScanBarcodeActivity"
     android:theme="@style/AppTheme.Dark"
     android:background="@color/colorPrimary">
     <ProgressBar
@@ -18,15 +18,27 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take a picture of the receipt"
+        android:text="Align the barcode with the red line and press Capture"
+        android:textAlignment="center"
         android:layout_gravity="center"
         android:textSize="18dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"/>
-    <TextureView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:id="@+id/camera_texture_view"/>
+        android:layout_height="wrap_content">
+        <TextureView
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            android:id="@+id/camera_texture_view"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ff0000"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

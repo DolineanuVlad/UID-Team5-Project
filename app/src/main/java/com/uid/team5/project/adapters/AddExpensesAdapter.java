@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
 import com.uid.team5.project.models.Expense;
 
@@ -24,60 +26,58 @@ import java.util.ArrayList;
 public class AddExpensesAdapter extends BaseAdapter {
     public ArrayList<Expense> expenses;
     private Context context;
+    AppDataSingleton appDataSingleton;
 
     public AddExpensesAdapter(Context context) {
         this.context = context;
+        appDataSingleton = AppDataSingleton.getInstance();
     }
 
     @Override
-    public View getView(int pos, View convertView, ViewGroup parent) {
+    public View getView(final int pos, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = (convertView == null) ? inflater.inflate(R.layout.list_element_manual_addition, parent, false) : convertView;
 
         if (pos < expenses.size()) {
-            EditText description =  row.findViewById(R.id.add_expense_description);
-            EditText price =  row.findViewById(R.id.add_expense_price);
-            Spinner category = row.findViewById(R.id.add_expense_category);
+            final EditText description =  row.findViewById(R.id.add_expense_description);
+            final EditText price =  row.findViewById(R.id.add_expense_price);
+            final Spinner category = row.findViewById(R.id.add_expense_category);
+            ExpensesCategoriesSpinnerAdapter ecsp = new ExpensesCategoriesSpinnerAdapter(appDataSingleton.getExpenseCategories(), context);
+            category.setAdapter(ecsp);
             category.setSelection(expenses.get(pos).getCategoryExpenseId());
+
+
+
             description.setText(expenses.get(pos).getDescription());
             price.setText(new DecimalFormat("#.##").format(expenses.get(pos).getPrice()));
-            final int position = pos;
 
-            description.addTextChangedListener(new TextWatcher() {
+            description.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
-                @Override
-                public void afterTextChanged(Editable s) {
-                    expenses.get(position).setDescription(s.toString());
-                    notifyDataSetChanged();
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        expenses.get(pos).setDescription(description.getText().toString());
+                    }
                 }
             });
 
-            price.addTextChangedListener(new TextWatcher() {
+            price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
-                @Override
-                public void afterTextChanged(Editable s) {
-                    expenses.get(position).setPrice(Float.parseFloat(s.toString()));
-                    notifyDataSetChanged();
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        expenses.get(pos).setPrice(Float.parseFloat(price.getText().toString()));;
+                    }
                 }
             });
 
-            category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                    expenses.get(position).setCategoryExpenseId(pos);
-                    String[] categories = parent.getResources().getStringArray(R.array.category_arrays);
-                    expenses.get(position).setCategory(categories[pos]);
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        expenses.get(pos).setCategoryExpenseId((int)category.getSelectedItemId());
+                        String[] categories = context.getResources().getStringArray(R.array.category_arrays);
+                        expenses.get(pos).setCategory(categories[category.getSelectedItemPosition()]);
+                        notifyDataSetChanged();
+                    }
                 }
             });
         }
@@ -97,7 +97,7 @@ public class AddExpensesAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return expenses.get(position).hashCode();
+        return position;
     }
 
 }

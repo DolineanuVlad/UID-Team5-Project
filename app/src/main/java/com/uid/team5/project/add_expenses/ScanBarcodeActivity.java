@@ -28,10 +28,15 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.adapters.ExpensesCategoriesSpinnerAdapter;
+import com.uid.team5.project.models.Expense;
+import com.uid.team5.project.shared.MainActivity;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -39,7 +44,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ScanReceiptActivity extends AppCompatActivity {
+public class ScanBarcodeActivity extends AppCompatActivity {
 
     AppDataSingleton appDataSingleton;
     private String cameraId;
@@ -84,16 +89,48 @@ public class ScanReceiptActivity extends AppCompatActivity {
                     cameraDevice.close();
                     popup.dismiss();
 
-                    appDataSingleton.fakeScanningRecipe();
-
                     progressView.setVisibility(View.VISIBLE);
                     progressView.animate().setDuration(2000).alpha(1).setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             progressView.setVisibility(View.GONE);
-                            Intent intent = new Intent(ScanReceiptActivity.this, ManualAdditionActivity.class);
-                            startActivity(intent);
-                            finish();
+
+                            popup = builder.create();
+                            View v = getLayoutInflater().inflate(R.layout.popup_expense_insertion, null);
+                            final EditText description = v.findViewById(R.id.new_expense_description);
+                            final EditText price = v.findViewById(R.id.new_expense_price);
+                            final Spinner category = v.findViewById(R.id.new_expense_category);
+                            ExpensesCategoriesSpinnerAdapter ecsa = new ExpensesCategoriesSpinnerAdapter(appDataSingleton.getExpenseCategories(), v.getContext());
+                            category.setAdapter(ecsa);
+                            description.setText("Electricity Bill");
+                            price.setText("84.26");
+                            category.setSelection(1);
+
+                            Button confirmButton = v.findViewById(R.id.new_expense_confirm_button);
+                            Button cancelButton = v.findViewById(R.id.new_expense_cancel_button);
+
+                            cancelButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popup.dismiss();
+                                }
+                            });
+
+                            confirmButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ArrayList<Expense> exp = appDataSingleton.getExpenses();
+                                    appDataSingleton.getExpenses().add(new Expense((int)exp.size(),
+                                            description.getText().toString(),
+                                            Float.parseFloat(price.getText().toString()),
+                                            "House",
+                                            (int)category.getSelectedItemId()));
+                                    popup.dismiss();
+                                    finish();
+                                }
+                            });
+                            popup.setView(v);
+                            popup.show();
                         }
                     });
                 }
@@ -158,7 +195,7 @@ public class ScanReceiptActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_receipt);
+        setContentView(R.layout.activity_scan_barcode);
         cameraTextureView = findViewById(R.id.camera_texture_view);
         cameraTextureView.setSurfaceTextureListener(surfaceTextureListener);
         progressView = findViewById(R.id.scan_receipt_progress);
