@@ -50,6 +50,7 @@
     <string name="price">Price</string>
     <string name="group_prompt">Choose target person</string>
     <string-array name="group_arrays">
+        <item>Choose target group</item>
         <item>Personal</item>
         <item>Group</item>
 
@@ -57,6 +58,7 @@
     <string name="pick_date">Pick Date</string>
     <string name="category_prompt">Choose category</string>
     <string-array name="category_arrays">
+        <item>Choose category</item>
         <item>Clothing</item>
         <item>Gagets</item>
         <item>House</item>
@@ -64,6 +66,7 @@
         <item>Food</item>
     </string-array>
     <string-array name="family_group_roles">
+        <item>Regular</item>
         <item>Regular</item>
         <item>Administrator</item>
         <item>Child</item>
@@ -83,6 +86,7 @@
     <string name="assistant">Enable personal assistant</string>
     <string name="add_a_new_expense">Add a new expense</string>
     <string-array name="priority_arrays">
+        <item>Choose priority</item>
         <item>High</item>
         <item>Medium</item>
         <item>Low</item>
