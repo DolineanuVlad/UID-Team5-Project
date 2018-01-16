@@ -9,6 +9,31 @@ import java.io.Serializable;
 public class ExpenseCategory implements Serializable {
     private String name;
     private String description;
+    private int id;
+    private int icon;
+
+    public ExpenseCategory(int id, String name, String description, int icon) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.icon = icon;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
 
     public String getName() {
         return name;
@@ -23,11 +48,6 @@ public class ExpenseCategory implements Serializable {
     }
 
     public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public ExpenseCategory(String name, String description) {
-        this.name = name;
         this.description = description;
     }
 }

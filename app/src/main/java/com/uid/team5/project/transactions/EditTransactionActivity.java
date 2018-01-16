@@ -1,5 +1,6 @@
 package com.uid.team5.project.transactions;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
@@ -8,16 +9,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.uid.team5.project.AppDataSingleton;
 import com.uid.team5.project.R;
+import com.uid.team5.project.WelcomeActivity;
+import com.uid.team5.project.adapters.ExpensesCategoriesSpinnerAdapter;
+import com.uid.team5.project.auth.LoginActivity;
 import com.uid.team5.project.models.Expense;
 import com.uid.team5.project.shared.MainActivity;
 
@@ -61,10 +67,12 @@ public class EditTransactionActivity extends AppCompatActivity {
         ImageButton calendarBtn = findViewById(R.id.edit_transaction_calendar_button);
         final TextView dateLabel = findViewById(R.id.edit_transaction_date);
         final TextView amountLabel = findViewById(R.id.edit_transaction_amount_top);
-        final TextView catLabel = findViewById(R.id.edit_transaction_category);
-
+        final TextView catLabel = findViewById(R.id.edit_transaction_category_top_label);
+        final ImageView catTopIcon = findViewById(R.id.edit_transaction_category_icon);
         final EditText description = findViewById(R.id.edit_transaction_description);
-        final EditText location = findViewById(R.id.edit_transaction_location);
+        final Spinner categoriesSpinner = findViewById(R.id.edit_transaction_category_spinner);
+        ExpensesCategoriesSpinnerAdapter ecsp = new ExpensesCategoriesSpinnerAdapter(dataService.getExpenseCategories(),this);
+        categoriesSpinner.setAdapter(ecsp);
         final EditText amount = findViewById(R.id.edit_transaction_amount);
 
         FloatingActionButton ready = findViewById(R.id.floatingActionButton);
@@ -73,7 +81,6 @@ public class EditTransactionActivity extends AppCompatActivity {
 
         if (expense != null) {
             description.setText(expense.getDescription());
-            location.setText("no loc yet");
             ArrayAdapter myAdap = (ArrayAdapter) spinner.getAdapter(); //cast to an ArrayAdapter
 
             int spinnerPosition = myAdap.getPosition("Every day");
@@ -85,7 +92,9 @@ public class EditTransactionActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
             String stringDate = sdf.format(expense.getDate());
             dateLabel.setText(stringDate);
-            catLabel.setText(expense.getCategory());
+            catLabel.setText(dataService.getExpenseCategories().get(expense.getCategoryExpenseId()).getName());
+            catTopIcon.setImageResource(dataService.getExpenseCategories().get(expense.getCategoryExpenseId()).getIcon());
+            categoriesSpinner.setSelection(expense.getCategoryExpenseId());
         } else {
             expense = new Expense();
         }
@@ -122,9 +131,9 @@ public class EditTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Expense edditedExpense = dataService.getCurrentlyEditted();
-                edditedExpense.setLocation(location.getText().toString());
                 edditedExpense.setPrice(Float.valueOf(amount.getText().toString()));
                 edditedExpense.setDescription(description.getText().toString());
+                edditedExpense.setCategoryExpenseId((int)categoriesSpinner.getSelectedItemId());
 
                 for(int i=0; i< dataService.getExpenses().size();i++)
                 {
@@ -149,4 +158,23 @@ public class EditTransactionActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.edit_transactions_toolbar_menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.edit_transactions_toolbar_remove) {
+
+            Expense exp = dataService.getCurrentlyEditted();
+            dataService.getExpenses().remove(exp);
+            startActivity(new Intent(EditTransactionActivity.this, MainActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

@@ -25,7 +25,7 @@
             android:paddingTop="8dp">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/edit_transaction_category_icon"
                 android:layout_width="54dp"
                 android:layout_height="54dp"
                 android:layout_alignBottom="@+id/edit_transaction_amount_top"
@@ -45,18 +45,6 @@
                 android:text="32 USD"
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/edit_transaction_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/edit_transaction_amount_top"
-                android:layout_alignBottom="@+id/edit_transaction_amount_top"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/imageView6"
-                android:text="TextView"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
 
         </RelativeLayout>
 
@@ -103,38 +91,20 @@
         android:inputType="textPersonName" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
-        android:layout_alignStart="@+id/imageView2"
-        android:layout_below="@+id/imageView2"
-        android:layout_marginTop="93dp"
-        app:srcCompat="@drawable/ic_location_on_black_24dp" />
-
-    <EditText
-        android:id="@+id/edit_transaction_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/edit_transaction_description"
-        android:layout_alignTop="@+id/imageView4"
-        android:ems="10"
-        android:hint="Location"
-        android:inputType="textPersonName" />
-
-    <ImageView
         android:id="@+id/imageView5"
         android:layout_width="49dp"
         android:layout_height="49dp"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_below="@+id/imageView4"
-        android:layout_marginTop="40dp"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_below="@+id/edit_transaction_category_spinner"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="34dp"
         app:srcCompat="@drawable/ic_repeat_black_24dp" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/edit_transaction_location"
+        android:layout_alignStart="@+id/edit_transaction_repeat_spinner"
         android:layout_alignTop="@+id/imageView5"
         android:text="Repeat" />
 
@@ -142,8 +112,8 @@
         android:id="@+id/edit_transaction_repeat_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView5"
-        android:layout_alignStart="@+id/textView14"
+        android:layout_alignStart="@+id/edit_transaction_amount"
+        android:layout_below="@+id/textView14"
         android:entries="@array/expenses_repeat"
         android:spinnerMode="dialog" />
 
@@ -178,5 +148,25 @@
         android:ems="10"
         android:hint="Amount"
         android:inputType="numberDecimal" />
+
+    <Spinner
+        android:id="@+id/edit_transaction_category_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView7"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/edit_transaction_category_top_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_transaction_calendar_button"
+        android:layout_marginBottom="30dp"
+        android:layout_toEndOf="@+id/edit_transaction_calendar_button"
+        android:text="TextView"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 </RelativeLayout>

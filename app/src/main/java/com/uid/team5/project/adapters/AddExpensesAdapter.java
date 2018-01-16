@@ -35,7 +35,7 @@ public class AddExpensesAdapter extends BaseAdapter {
             EditText description =  row.findViewById(R.id.add_expense_description);
             EditText price =  row.findViewById(R.id.add_expense_price);
             Spinner category = row.findViewById(R.id.add_expense_category);
-            category.setSelection(expenses.get(pos).getCategoryPosition());
+            category.setSelection(expenses.get(pos).getCategoryExpenseId());
             description.setText(expenses.get(pos).getDescription());
             price.setText(String.format(Locale.ENGLISH,"%f", expenses.get(pos).getPrice()));
         }

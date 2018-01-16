@@ -15,11 +15,11 @@ public class ExpenseCategoryService {
         public static List<ExpenseCategory> getExpenses(){
             List<ExpenseCategory> expenses=new ArrayList<ExpenseCategory>();
 
-            ExpenseCategory e1=new ExpenseCategory("food", "groceries+fruits");
-            ExpenseCategory e2=new ExpenseCategory("fun", "theathre+cinema+sports");
-
-            expenses.add(e1);
-            expenses.add(e2);
+//            ExpenseCategory e1=new ExpenseCategory("food", "groceries+fruits");
+//            ExpenseCategory e2=new ExpenseCategory("fun", "theathre+cinema+sports");
+//
+//            expenses.add(e1);
+//            expenses.add(e2);
 
             return expenses;
         }

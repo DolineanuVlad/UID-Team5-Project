@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,54 +25,48 @@
         android:layout_toEndOf="@+id/transactions_item_category_image"
         android:text="Food &amp; Drink"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
-
-    <ImageView
-        android:id="@+id/transactions_item_loc_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/transactions_item_category_image"
-        android:layout_toEndOf="@+id/transactions_item_category_image"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_location_on_black_24dp" />
-
-    <TextView
-        android:id="@+id/transactions_item_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/transactions_item_loc_image"
-        android:layout_marginStart="14dp"
-        android:layout_toEndOf="@+id/transactions_item_loc_image"
-        android:text="TextView"
-        android:visibility="gone" />
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/transactions_item_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/transactions_item_category_image"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="28dp"
-        android:layout_toEndOf="@+id/transactions_item_descript_image"
+        android:layout_alignStart="@+id/transactions_item_category"
+        android:layout_below="@+id/transactions_item_category"
         android:text="TextView"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/transactions_item_descript_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/transactions_item_description"
-        android:layout_toEndOf="@+id/transactions_item_category_image"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_edit_black_24dp" />
+        android:textSize="16sp"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/transactions_item_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/transactions_item_category"
-        android:layout_marginEnd="12dp"
+        android:layout_above="@+id/transactions_item_category"
+        android:layout_toStartOf="@+id/textView12"
         android:text="TextView"
-        android:textColor="?attr/colorBackgroundFloating" />
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/transactions_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/transactions_item_description"
+        android:layout_alignStart="@+id/transactions_item_amount"
+        android:text="TextView"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/transactions_item_amount"
+        android:layout_alignBottom="@+id/transactions_item_amount"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="5dp"
+        android:text="RON"
+        android:textColor="@android:color/holo_red_light"
+        tools:text="RON" />
 </RelativeLayout>

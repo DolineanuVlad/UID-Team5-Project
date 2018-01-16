@@ -16,7 +16,7 @@ public class Expense implements Serializable {
     private String description;
     private float price;
     private String category;
-    private int categoryPosition;
+    private int categoryExpenseId;
     private int id;
     private Date date;
     private int categoryImage;
@@ -27,7 +27,7 @@ public class Expense implements Serializable {
         this.description = description;
         this.price = price;
         this.category = category;
-        this.categoryPosition = categoryPosition;
+        this.categoryExpenseId = categoryPosition;
         this.categoryImage = R.drawable.ic_train_black_24dp;
         this.location = "";
         this.date = Calendar.getInstance().getTime();
@@ -39,7 +39,7 @@ public class Expense implements Serializable {
         this.description = description;
         this.price = price;
         this.category = category;
-        this.categoryPosition = categoryPosition;
+        this.categoryExpenseId = categoryPosition;
         this.categoryImage = R.drawable.ic_train_black_24dp;
         this.location = "";
         this.date = Calendar.getInstance().getTime();
@@ -114,11 +114,11 @@ public class Expense implements Serializable {
         this.category = category;
     }
 
-    public int getCategoryPosition() {
-        return categoryPosition;
+    public int getCategoryExpenseId() {
+        return categoryExpenseId;
     }
 
-    public void setCategoryPosition(int categoryPosition) {
-        this.categoryPosition = categoryPosition;
+    public void setCategoryExpenseId(int categoryExpenseId) {
+        this.categoryExpenseId = categoryExpenseId;
     }
 }

@@ -3,6 +3,7 @@ package com.uid.team5.project;
 import android.content.Context;
 
 import com.uid.team5.project.models.Expense;
+import com.uid.team5.project.models.ExpenseCategory;
 import com.uid.team5.project.models.Member;
 import com.uid.team5.project.models.RecurringPayment;
 import com.uid.team5.project.models.User;
@@ -21,7 +22,7 @@ import java.util.UUID;
  * Created by Gabriel on 1/9/2018.
  */
 
-public class AppDataSingleton implements Serializable{
+public class AppDataSingleton implements Serializable {
 
     private static AppDataSingleton instance = null;
     public ArrayList<Expense> expenses;
@@ -30,70 +31,57 @@ public class AppDataSingleton implements Serializable{
     private boolean enabledAssistant;
     private ArrayList<Member> members;
     private Expense CurrentlyEditted;
-
-    public UUID getCurrentUserId() {
-        return currentUserId;
-    }
-
     private UUID currentUserId;
-
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
-    }
-
     private ArrayList<User> users;
 
-    public AppDataSingleton()
-    {
+    private ArrayList<ExpenseCategory> expenseCategories;
+
+    public AppDataSingleton() {
         recurringPayments = new ArrayList<>();
         members = new ArrayList<>();
         expenses = new ArrayList<>();
         currentInserionOfExpenses = new ArrayList<>();
         users = new ArrayList<>();
+        expenseCategories = new ArrayList<>();
 
-        enabledAssistant=false;
+        enabledAssistant = false;
 
-       if(expenses.size() == 0)
-       {
-           recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
-           recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
+        if (expenses.size() == 0) {
+            recurringPayments.add(new RecurringPayment("Rent", "11 of month", "255 $"));
+            recurringPayments.add(new RecurringPayment("Car loan", "3rd of month", "300 $"));
 
-           members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger,"50"));
-           members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio,"100"));
+            members.add(new Member("Dianne", "Sister", R.drawable.member_diane_kruger, "50"));
+            members.add(new Member("Leo", "Brother", R.drawable.member_leonardo_dicaprio, "100"));
 
-           User user = new User("test@email.com", "password", "test");
-           users.add(user);
+            User user = new User("test@email.com", "password", "test");
+            users.add(user);
 
-           expenses.add(new Expense(expenses.size(),"asdsa dsadsa", 52, "Lemne",1, user.getId()));
-           expenses.add(new Expense(expenses.size(),"fdfsd ASD", 52, "Food",1, user.getId()));
+            expenses.add(new Expense(expenses.size(), "asdsa dsadsa", 52, "Lemne", 1, user.getId()));
+            expenses.add(new Expense(expenses.size(), "fdfsd ASD", 52, "Food", 1, user.getId()));
 
-       }
+            expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Food","Category for all types of food", R.drawable.icons8_food_and_wine ));
+            expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Personal Car","Car maintainance, gas", R.drawable.icons8_shopping_cart ));
+            expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Children","Price for carring for children", R.drawable.icons8_baby ));
+            expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Public Transport","Public transportation", R.drawable.icons8_transportation ));
+            expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Vacation","Vacations", R.drawable.icons8_travel ));
+
+        }
 
     }
 
-    public static AppDataSingleton getInstance()
-    {
-        if(instance == null)
-        {
+    public static AppDataSingleton getInstance() {
+        if (instance == null) {
             instance = new AppDataSingleton();
         }
 
         return instance;
     }
 
-
-
-    public static void setInstance(AppDataSingleton mInstance)
-    {
+    public static void setInstance(AppDataSingleton mInstance) {
         instance = mInstance;
     }
 
-    public static void loadFromFile(Context context)
-    {
+    public static void loadFromFile(Context context) {
         FileInputStream fis = null;
         try {
             fis = context.openFileInput("budget_data_save");
@@ -126,6 +114,22 @@ public class AppDataSingleton implements Serializable{
         }
     }
 
+    public UUID getCurrentUserId() {
+        return currentUserId;
+    }
+
+    public void setCurrentUserId(UUID currentUserId) {
+        this.currentUserId = currentUserId;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
     public ArrayList<RecurringPayment> getRecurringPayments() {
         return recurringPayments;
     }
@@ -154,6 +158,19 @@ public class AppDataSingleton implements Serializable{
         return CurrentlyEditted;
     }
 
+    public void setCurrentlyEditted(Expense currentlyEditted) {
+        CurrentlyEditted = currentlyEditted;
+    }
+
+    public ArrayList<ExpenseCategory> getExpenseCategories() {
+        return expenseCategories;
+    }
+
+    public void setExpenseCategories(ArrayList<ExpenseCategory> expenseCategories) {
+        this.expenseCategories = expenseCategories;
+    }
+
+
     public void setCurrentlyEdittedTransaction(Expense currentlyEditted) {
         CurrentlyEditted = currentlyEditted;
     }
@@ -178,29 +195,21 @@ public class AppDataSingleton implements Serializable{
         this.enabledAssistant = enabledAssistant;
     }
 
-    public void setCurrentUserId(UUID currentUserId) {
-        this.currentUserId = currentUserId;
-    }
-
     public ArrayList<Expense> getExpensesByCurrentUser() {
 
         ArrayList<Expense> usersExpenses = new ArrayList<>();
-        for(Expense exp: expenses)
-        {
-            if(exp.getCreatedByUser().equals(currentUserId))
+        for (Expense exp : expenses) {
+            if (exp.getCreatedByUser().equals(currentUserId))
                 usersExpenses.add(exp);
         }
 
         return usersExpenses;
     }
 
-    public User getCurrentUser()
-    {
-        if(this.currentUserId != null)
-        {
-            for(User user: users)
-            {
-                if(user.getId().equals(this.currentUserId))
+    public User getCurrentUser() {
+        if (this.currentUserId != null) {
+            for (User user : users) {
+                if (user.getId().equals(this.currentUserId))
                     return user;
             }
         }

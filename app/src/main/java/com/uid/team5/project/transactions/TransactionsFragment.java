@@ -65,7 +65,7 @@ public class TransactionsFragment extends Fragment {
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.transactions_tab_layout);
         mTransactionsListView = (ListView) rootView.findViewById(R.id.transactions_list_view);
 
-        transactionsAdapter = new TransactionsAdapter(this.getContext(), dataService.getExpensesByCurrentUser());
+        transactionsAdapter = new TransactionsAdapter(this.getContext(), dataService.getExpensesByCurrentUser(), dataService.getExpenseCategories());
         mTransactionsListView.setAdapter(transactionsAdapter);
 
         mTransactionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
