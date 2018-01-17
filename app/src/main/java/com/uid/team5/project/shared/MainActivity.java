@@ -279,9 +279,10 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_family_group) {
             selectedFragment = FamilyGroupFragment.newInstance();
             bottomNavigation.setVisibility(View.GONE);
-        } else if (id == R.id.nav_rec_payments) {
-            selectedFragment = RecurringPaymentsFragment.newInstance();
-            bottomNavigation.setVisibility(View.GONE);
+
+//        } else if (id == R.id.nav_rec_payments) {
+//            selectedFragment = RecurringPaymentsFragment.newInstance();
+//            bottomNavigation.setVisibility(View.GONE);
         } else if (id == R.id.nav_categories) {
             selectedFragment = ExpenseCategoriesFragment.newInstance();
             bottomNavigation.setVisibility(View.GONE);

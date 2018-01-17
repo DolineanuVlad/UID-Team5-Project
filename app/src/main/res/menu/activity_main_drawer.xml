@@ -13,10 +13,6 @@
             android:icon="@drawable/ic_group_black_24dp"
             android:title="@string/family_group" />
         <item
-            android:id="@+id/nav_rec_payments"
-            android:icon="@drawable/ic_payment_black_24dp"
-            android:title="@string/recuring_payments" />
-        <item
             android:id="@+id/nav_categories"
             android:icon="@drawable/ic_folder_black_24dp"
             android:title="@string/expenses_categories" />
