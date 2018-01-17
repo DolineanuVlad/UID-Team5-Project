@@ -122,51 +122,7 @@ public class OverviewFragment extends Fragment {
        // mChart.setEntryLabelTypeface(mTfRegular);
         mChart.setEntryLabelTextSize(12f);
 
-        view.findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PdfDocument doc = new PdfDocument(getActivity());
-                doc.addPage(new AbstractViewRenderer(getActivity(), R.layout.page1) {
 
-                    @Override
-                    protected void initView(View view) {
-                        TextView tv_hello = (TextView) view.findViewById(R.id.tv_hello);
-                        tv_hello.setText("This is  TEST..PAGE 1..!!!!");
-                    }
-                });
-
-                doc.setRenderWidth(2115);
-                doc.setRenderHeight(1500);
-                doc.setOrientation(PdfDocument.A4_MODE.LANDSCAPE);
-                doc.setProgressTitle(R.string.app_name);
-                doc.setProgressMessage(R.string.app_name);
-                doc.setFileName("test");
-                doc.setInflateOnMainThread(false);
-                doc.setListener(new PdfDocument.Callback() {
-                    @Override
-                    public void onComplete(File file) {
-                        Log.i(PdfDocument.TAG_PDF_MY_XML, "Complete");
-                        Log.e(TAG, "onComplete: " + file.getAbsolutePath());
-                        Intent target = new Intent(Intent.ACTION_VIEW);
-                        target.setDataAndType(Uri.fromFile(file),"application/pdf");
-                        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-
-                        Intent intent = Intent.createChooser(target, "Open File");
-                        try {
-                            startActivity(intent);
-                        } catch (ActivityNotFoundException e) {
-                            // Instruct the user to install a PDF reader here, or something
-                        }
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        Log.i(PdfDocument.TAG_PDF_MY_XML, "Error");
-                    }
-                });
-                doc.createPdf(getActivity());
-            }
-        });
         return view;
     }
 
