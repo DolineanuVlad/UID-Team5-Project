@@ -59,11 +59,12 @@
     <string name="category_prompt">Choose category</string>
     <string-array name="category_arrays">
         <item>Choose category</item>
-        <item>Clothing</item>
-        <item>Gagets</item>
-        <item>House</item>
-        <item>Leisure</item>
         <item>Food</item>
+        <item>House</item>
+        <item>Personal Car</item>
+        <item>Children</item>
+        <item>Public Transport</item>
+        <item>Vacation</item>
     </string-array>
     <string-array name="family_group_roles">
         <item>Regular</item>

@@ -97,8 +97,10 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case R.id.navigation_assistant:
                     mToolbar.setTitle("Assistant");
-
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("cardInvisible",false);
                     selectedFragment= AssistantFragment.newInstance();
+                    selectedFragment.setArguments(bundle);
                     break;
                 case R.id.navigation_add:
                     final AlertDialog popup = builder.create();

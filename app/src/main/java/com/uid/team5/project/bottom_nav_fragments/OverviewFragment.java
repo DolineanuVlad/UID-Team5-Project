@@ -1,13 +1,17 @@
 package com.uid.team5.project.bottom_nav_fragments;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -18,9 +22,14 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.hendrix.pdfmyxml.PdfDocument;
+import com.hendrix.pdfmyxml.viewRenderer.AbstractViewRenderer;
 import com.uid.team5.project.R;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +44,7 @@ public class OverviewFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     PieChart mChart;
     protected String[] mParties = new String[] {
-           "Clothing","Food","Rent","Restaurants"
+           "Vacation","Food","House","Children"
     };
     public OverviewFragment() {
         // Required empty public constructor
@@ -112,6 +121,52 @@ public class OverviewFragment extends Fragment {
         mChart.setEntryLabelColor(Color.DKGRAY);
        // mChart.setEntryLabelTypeface(mTfRegular);
         mChart.setEntryLabelTextSize(12f);
+
+        view.findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PdfDocument doc = new PdfDocument(getActivity());
+                doc.addPage(new AbstractViewRenderer(getActivity(), R.layout.page1) {
+
+                    @Override
+                    protected void initView(View view) {
+                        TextView tv_hello = (TextView) view.findViewById(R.id.tv_hello);
+                        tv_hello.setText("This is  TEST..PAGE 1..!!!!");
+                    }
+                });
+
+                doc.setRenderWidth(2115);
+                doc.setRenderHeight(1500);
+                doc.setOrientation(PdfDocument.A4_MODE.LANDSCAPE);
+                doc.setProgressTitle(R.string.app_name);
+                doc.setProgressMessage(R.string.app_name);
+                doc.setFileName("test");
+                doc.setInflateOnMainThread(false);
+                doc.setListener(new PdfDocument.Callback() {
+                    @Override
+                    public void onComplete(File file) {
+                        Log.i(PdfDocument.TAG_PDF_MY_XML, "Complete");
+                        Log.e(TAG, "onComplete: " + file.getAbsolutePath());
+                        Intent target = new Intent(Intent.ACTION_VIEW);
+                        target.setDataAndType(Uri.fromFile(file),"application/pdf");
+                        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                        Intent intent = Intent.createChooser(target, "Open File");
+                        try {
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            // Instruct the user to install a PDF reader here, or something
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.i(PdfDocument.TAG_PDF_MY_XML, "Error");
+                    }
+                });
+                doc.createPdf(getActivity());
+            }
+        });
         return view;
     }
 

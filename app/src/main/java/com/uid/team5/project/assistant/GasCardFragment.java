@@ -29,6 +29,7 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.uid.team5.project.R;
+import com.uid.team5.project.bottom_nav_fragments.AssistantFragment;
 
 import java.util.ArrayList;
 
@@ -78,7 +79,19 @@ public class GasCardFragment extends Fragment implements OnMapReadyCallback {
 
         barView.setBottomTextList(str);
         barView.setDataList(intLis,100);
-
+        Button mar=(Button)view.findViewById(R.id.mar);
+        mar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("cardInvisible",true);
+                AssistantFragment fragment= AssistantFragment.newInstance();
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame_layout, fragment);
+                transaction.commit();
+            }
+        });
         return view;
     }
 

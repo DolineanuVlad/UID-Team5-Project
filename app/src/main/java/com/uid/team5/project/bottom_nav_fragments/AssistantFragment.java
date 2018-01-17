@@ -60,8 +60,10 @@ private boolean enabled;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        boolean vis=getArguments().getBoolean("cardInvisible");
         View view=(View)inflater.inflate(R.layout.fragment_assistant, container, false);
-        Switch onOffSwitch = (Switch)  view.findViewById(R.id.enableAssistant);
+        if (vis) view.findViewById(R.id.card1).setVisibility(View.INVISIBLE);
+            Switch onOffSwitch = (Switch)  view.findViewById(R.id.enableAssistant);
         ImageButton addBtn=(ImageButton)view.findViewById(R.id.addShopping);
         ImageButton details=(ImageButton)view.findViewById(R.id.detailsGas);
         if (AppDataSingleton.getInstance().isEnabledAssistant()){

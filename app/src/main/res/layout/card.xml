@@ -108,7 +108,7 @@
         </HorizontalScrollView>
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/mar"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginLeft="270dp"
