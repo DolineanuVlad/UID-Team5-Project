@@ -78,8 +78,8 @@ public class AppDataSingleton implements Serializable {
             User user = new User("test@email.com", "password", "test");
             users.add(user);
 
-            expenses.add(new Expense(expenses.size(), "asdsa dsadsa", 52, "Lemne", 1, user.getId()));
-            expenses.add(new Expense(expenses.size(), "fdfsd ASD", 52, "Food", 1, user.getId()));
+            expenses.add(new Expense(expenses.size(), "expense 1", 52, "Lemne", 1, user.getId()));
+            expenses.add(new Expense(expenses.size(), "expense 2", 52, "Food", 1, user.getId()));
 
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(),"Food","Category for all types of food", R.drawable.icons8_food_and_wine ));
             expenseCategories.add(new ExpenseCategory(expenseCategories.size(), "House", "Category for house related expenses", R.drawable.icons8_house_50));
